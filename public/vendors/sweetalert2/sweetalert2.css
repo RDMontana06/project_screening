@@ -724,7 +724,7 @@
 .swal2-icon.swal2-success .swal2-success-ring {
   position: absolute;
   z-index: 2;
-  top: -0.25em;
+  top: -1.28em;
   left: -0.25em;
   box-sizing: content-box;
   width: 100%;

@@ -1,130 +1,130 @@
 @extends('layouts.header')
 
 @section('content')
-	@if (auth()->user()->roles == 2 || auth()->user()->roles == 1)
-		<div class="main-panel">
-			<div class="content-wrapper">
-				<div class="row">
-					<div class="col-md-12 grid-margin">
-						<div class="row">
-							<div class="col-md-3 mb-4 stretch-card transparent">
-								<div class="card card-tale">
-									<div class="card-body">
-										<p class="mb-4">Approved Projects</p>
-										<p class="fs-30 mb-2">{{ $projects->where('status', 'Approved')->count() }}</p>
-									</div>
+	<div class="main-panel">
+		<div class="content-wrapper">
+			<div class="row">
+				<div class="col-md-12 grid-margin">
+					<div class="row">
+						<div class="col-md-3 mb-4 stretch-card transparent">
+							<div class="card card-tale">
+								<div class="card-body">
+									<p class="mb-4">Approved Projects</p>
+									<p class="fs-30 mb-2">{{ $projects->where('status', 'Approved')->count() }}</p>
 								</div>
 							</div>
-							<div class="col-md-3 mb-4 stretch-card transparent">
-								<div class="card card-dark-blue">
-									<div class="card-body">
-										<p class="mb-4">Rejected Projects</p>
-										<p class="fs-30 mb-2">{{ $projects->where('status', 'Rejected')->count() }}</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 mb-4 stretch-card transparent">
-								<div class="card card-light-blue">
-									<div class="card-body">
-										<p class="mb-4">Pending Approval Projects</p>
-										<p class="fs-30 mb-2">{{ $projects->where('status', 'Pending')->count() }}</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3 mb-4 stretch-card transparent">
-								<div class="card card-light-danger">
-									<div class="card-body">
-										<p class="mb-4">Cancelled Projects</p>
-										<p class="fs-30 mb-2">{{ $projects->where('status', 'Cancelled')->count() }}</p>
-									</div>
-								</div>
-							</div>
-
 						</div>
-						<div class="card">
-							<div class="card-header bg-white text-dark mb-3 ">
-								<h4 class="font-weight-bold d-flex justify-content-start align-items-center">Project Screening
-									<button type="button" class="btn btn-dark btn-icon-text btn-rounded btn-sm ml-2" data-toggle="modal"
-										data-target="#projectModal">
-										<i class="ti-plus btn-icon-prepend"></i>Add Project
-									</button>
-								</h4>
+						<div class="col-md-3 mb-4 stretch-card transparent">
+							<div class="card card-dark-blue">
+								<div class="card-body">
+									<p class="mb-4">Rejected Projects</p>
+									<p class="fs-30 mb-2">{{ $projects->where('status', 'Rejected')->count() }}</p>
+								</div>
 							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table table-striped table-bordered " id="projects-table">
-										<thead>
-											<tr>
-												<th>Project Name</th>
-												<th>Product Type</th>
-												<th>Type</th>
-												<th>Location</th>
-												<th>Approved Budget</th>
-												<th>Status</th>
-												<th>Actions</th>
-											</tr>
-										</thead>
-										<tbody>
-											@foreach ($projects as $projectDetails)
-												<tr id='project{{ $projectDetails->id }}'>
-													<td>{{ $projectDetails->project_name }}</td>
-													<td>{{ $projectDetails->project_type }}</td>
-													<td>{{ $projectDetails->type }}</td>
-													<td>{{ $projectDetails->location }}</td>
-													<td>{{ number_format($projectDetails->approved_budget) }}</td>
-													<td id="tdId{{ $projectDetails->id }}">
-														{{-- <label id="label{{ $projectDetails->id }}" class="badge badge-info">{{ $projectDetails->status }}</label> --}}
-
-														@if ($projectDetails->status == 'Cancelled')
-															<label id="status{{ $projectDetails->id }}"
-																class="badge badge-warning">{{ $projectDetails->status }}</label>
-														@elseif ($projectDetails->status == 'Pending')
-															<label id="status{{ $projectDetails->id }}"
-																class="badge badge-info">{{ $projectDetails->status }}</label>
-														@elseif ($projectDetails->status == 'Approved')
-															<label id="status{{ $projectDetails->id }}"
-																class="badge badge-success">{{ $projectDetails->status }}</label>
-														@else
-															<label id="status{{ $projectDetails->id }}"
-																class="badge badge-danger">{{ $projectDetails->status }}</label>
-														@endif
-
-													</td>
-													<td style="width:10%;" class="">
-														@if ($projectDetails->status == 'Pending')
-															<button type="button" class="btn btn-icon btn-danger btn-sm cancelBtn" id="{{ $projectDetails->id }}"
-																title="Cancel Project" onclick="cancelProj(this.id)">
-																<i style="margin-left: -1px;" class="ti-close"></i>
-															</button>
-														@endif
-														<button type="button" data-toggle="modal" data-target="#viewProject{{ $projectDetails->id }}"
-															class="btn btn-icon btn-info btn-sm" title="View Project">
-															<i style="margin-left: -1px;" class="ti-eye"></i>
-														</button>
-														@include('projectScreening.show_project')
-													</td>
-												</tr>
-												@include('projectScreening.edit_project_form')
-											@endforeach
-										</tbody>
-									</table>
+						</div>
+						<div class="col-md-3 mb-4 stretch-card transparent">
+							<div class="card card-light-blue">
+								<div class="card-body">
+									<p class="mb-4">Pending Approval Projects</p>
+									<p class="fs-30 mb-2">{{ $projects->where('status', 'Pending')->count() }}</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 mb-4 stretch-card transparent">
+							<div class="card card-light-danger">
+								<div class="card-body">
+									<p class="mb-4">Cancelled Projects</p>
+									<p class="fs-30 mb-2">{{ $projects->where('status', 'Cancelled')->count() }}</p>
 								</div>
 							</div>
 						</div>
 					</div>
-					@include('projectScreening.project_form')
+					<div class="card">
+						<div class="card-header bg-white text-dark mb-3 ">
+							<h4 class="font-weight-bold d-flex justify-content-start align-items-center">Project Screening
+								<button type="button" class="btn btn-dark btn-icon-text btn-rounded btn-sm ml-2" data-toggle="modal"
+									data-target="#projectModal">
+									<i class="ti-plus btn-icon-prepend"></i>Add Project
+								</button>
+							</h4>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered " id="projects-table">
+									<thead>
+										<tr>
+											<th>Project Name</th>
+											<th>Product Type</th>
+											<th>Type</th>
+											<th>Location</th>
+											<th>Approved Budget</th>
+											<th>Status</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach ($projects as $projectDetails)
+											<tr id='project{{ $projectDetails->id }}'>
+												<td>{{ $projectDetails->project_name }}</td>
+												<td>{{ $projectDetails->project_type }}</td>
+												<td>{{ $projectDetails->type }}</td>
+												<td>{{ $projectDetails->location }}</td>
+												<td>{{ number_format($projectDetails->approved_budget) }}</td>
+												<td id="tdId{{ $projectDetails->id }}">
+													{{-- <label id="label{{ $projectDetails->id }}" class="badge badge-info">{{ $projectDetails->status }}</label> --}}
+
+													@if ($projectDetails->status == 'Cancelled')
+														<label id="status{{ $projectDetails->id }}"
+															class="badge badge-warning">{{ $projectDetails->status }}</label>
+													@elseif ($projectDetails->status == 'Pending')
+														<label id="status{{ $projectDetails->id }}"
+															class="badge badge-info">{{ $projectDetails->status }}</label>
+													@elseif ($projectDetails->status == 'Approved')
+														<label id="status{{ $projectDetails->id }}"
+															class="badge badge-success">{{ $projectDetails->status }}</label>
+													@elseif ($projectDetails->status == 'Buyout')
+														<label id="approvalStatus{{ $projectDetails->id }}"
+															class="badge badge-primary">{{ $projectDetails->status }}</label>
+													@else
+														<label id="status{{ $projectDetails->id }}"
+															class="badge badge-danger">{{ $projectDetails->status }}</label>
+													@endif
+
+												</td>
+												<td style="width:10%;" class="">
+													@if ($projectDetails->status == 'Pending')
+														<button type="button" class="btn btn-icon btn-danger btn-sm cancelBtn" id="{{ $projectDetails->id }}"
+															title="Cancel Project" onclick="cancelProj(this.id)">
+															<i style="margin-left: -1px;" class="ti-close"></i>
+														</button>
+													@endif
+													<button type="button" data-toggle="modal" data-target="#viewProject{{ $projectDetails->id }}"
+														class="btn btn-icon btn-info btn-sm" title="View Project">
+														<i style="margin-left: -1px;" class="ti-eye"></i>
+													</button>
+													@include('projectScreening.show_project')
+												</td>
+											</tr>
+											@include('projectScreening.edit_project_form')
+										@endforeach
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 				</div>
+				@include('projectScreening.project_form')
 			</div>
-			@include('layouts.footer')
 		</div>
-		</div>
-	@endif
+		@include('layouts.footer')
+	</div>
+	</div>
 @endsection
 @section('psScript')
 	<script>
 	 // Project Datatable
-	 var projects = {!! json_encode($projects->toArray()) !!};
-	 console.log(projects);
+	 //  var projects = {!! json_encode($projects->toArray()) !!};
+	 //  console.log(projects);
 	 $(document).ready(function() {
 	  $('#projects-table').DataTable({
 	   pageLength: 5,

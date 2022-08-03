@@ -18,11 +18,14 @@ class Admin
     {
         // dd(auth()->user()->roles);
         if (Auth::user()->roles == 1) {
-            return redirect()->route('projectScreening');
-        } else if (Auth::user()->roles == 2) {
-            return redirect()->route('projectScreening');
-        } else {
+            return $next($request);
+        }
+        // else if (Auth::user()->roles == 2) {
+        //     return redirect()->route('projectScreening');
+        // }
+        else {
             return redirect()->route('projectApproval');
         }
+        return redirect('/home');
     }
 }

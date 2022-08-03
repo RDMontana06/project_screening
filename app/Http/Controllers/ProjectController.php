@@ -6,53 +6,22 @@ use App\Attachment;
 use App\Project;
 use App\Contact;
 use Alert;
-
 use Illuminate\Http\Request;
 
-class ProjectScreeningController extends Controller
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function projectIndex(Request $request)
     {
-        $name = Request::route()->getName();
-        dd($name);
+        // dd($request);
         $projects = Project::with('attachment', 'contact')->get();
-
-        return view('projectScreening.index', ['projects' => $projects]);
+        return view($request->path().'.index', ['projects' => $projects]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function saveProject(Request $request)
+    public function projScrenningSave(Request $request)
     {
         $this->validate($request, [
             'project_name' => 'unique:projects|required',
@@ -117,16 +86,96 @@ class ProjectScreeningController extends Controller
 
         return back();
     }
-    public function canProject($id)
-    {
-        Project::Where('id', $id)->update(['status' => 'Cancelled']);
-        return back();
-    }
-    public function show(Project $project)
+    public function projScrenningShow(Request $request)
     {
         $projects = Project::with('attachment', 'contact')->get();
         //dd($projects);
         return $projects;
+    }
+    public function cancelProject($id)
+    {
+        Project::Where('id', $id)->update(['status' => 'Cancelled']);
+        return back();
+    }
+    public function rejectProject($id)
+    {
+        Project::Where('id', $id)->update(['status' => 'Rejected']);
+        return back();
+    }
+    public function approveProject(Request $request)
+    {
+        //dd($request);
+        $this->validate($request, [
+            'remarks' => 'required|min:3|max:1000',
+        ]);
+
+        Alert::question('Approve this project', 'Are you sure about this?');
+        Project::Where('id', $request->id)->update(
+            [
+                'status' => 'Approved',
+                'remarks' =>  $request->remarks
+            ]
+        );
+        Alert::success('Approved', 'Successfully Approved');
+        return back();
+    }
+    public function buyOutProject(Request $request)
+    {
+        Project::Where('id', $request->id)->update(
+            [
+                'status' => 'Buyout'
+            ]
+        );
+        Alert::success('Buyout', 'Successfully updated');
+        return back();
+    }
+    public function saveBuyoutType(Request $request){
+        // dd($request);
+
+        $this->validate($request, [
+            'buyout_type' => 'required',
+        ]);
+
+        Project::Where('id', $request->idx)->update(
+            [
+                'buyout_type' => $request->buyout_type,
+            ]
+        );
+        Alert::success('Buyout type', 'Successfully Updated')->persistent('Dismiss');
+        return back();
+
+
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Project $project)
+    {
+        //
     }
 
     /**

@@ -14,27 +14,40 @@
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::group(['middleware' => 'admin'], function () {
-        Route::get('/', 'HomeController@index');
-        Route::get('/home', 'HomeController@index')->name('index');
-        // Route::get('projectScreening', 'ProjectScreeningController@index')->name('projectScreening');
-    });
-    Route::group(['middleware' => 'requestor'], function () {
 
-        // Project Screening
-        Route::get('projectScreening', 'ProjectScreeningController@index')->name('projectScreening');
-        Route::get('get-projects', 'ProjectScreeningController@show');
-        Route::post('newProject', 'ProjectScreeningController@saveProject');
-        Route::post('cancelProjet/{id}', 'ProjectScreeningController@canProject');
-        Route::post('viewProjet/{id}', 'ProjectScreeningController@viewProject');
-    });
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('user', 'UserManagementController@index')->name('user');
 
-    Route::group(['middleware' => 'approver'], function () {
-        // Project Approval
-        Route::get('projectApproval', 'ProjectApprovalController@index')->name('projectApproval');
-        Route::post('rejectProjet/{id}', 'ProjectApprovalController@rejProject');
-        Route::post('approveProjet/{id}', 'ProjectApprovalController@approveProject');
-    });
+    Route::get('projectScreening', 'ProjectController@projectIndex')->name('projectScreening');
+    Route::get('get-projects', 'ProjectController@projScrenningShow');
+    Route::post('newProject', 'ProjectController@projScrenningSave');
+    Route::post('cancelProjet/{id}', 'ProjectController@cancelProject');
+
+    Route::get('projectApproval', 'ProjectController@projectIndex')->name('projectApproval');
+    Route::post('rejectProjet/{id}', 'ProjectController@rejectProject');
+    Route::post('approveProject', 'ProjectController@approveProject');
+
+    Route::get('buyout', 'BuyoutController@index')->name('buyout');
+    Route::post('buyOutProject/{id}', 'ProjectController@buyOutProject');
+    Route::post('buyoutType', 'ProjectController@saveBuyoutType');
+    Route::get('buyout/view/{id}', 'BuyoutController@view')->name('buyout_view');
+    Route::get('saveBuyoutDetails/{id}', 'BuyoutController@view');
+    Route::post('updateBuyoutCompany', 'BuyoutController@updateBuyout');
+    Route::post('buyout/view/savePayment/{proj_id}/{bo_id}', 'BuyoutController@savePayment');
+
+
+
+
+
+    // Route::group(['middleware' => 'admin'], function () {
+    // });
+
+    // Route::group(['middleware' => 'requestor'], function () {
+    // });
+
+    // Route::group(['middleware' => 'approver'], function () {
+    // });
 
     // Route::get('get-projects', ['as'=>'get.data','uses'=>'ProjectScreeningController@show']);
 

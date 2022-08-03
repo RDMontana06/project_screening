@@ -13,6 +13,9 @@ class Project extends Model
     public function attachment(){
         return $this->hasMany(Attachment::class);
     }
+    public function bo_companies(){
+        return $this->hasMany(BoCompany::class)->orderBy('id', 'desc');
+    }
     // public static function boot(){
     //     parent::boot();
     //     static::creating(function($project){
