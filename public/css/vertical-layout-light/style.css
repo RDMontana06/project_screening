@@ -28380,9 +28380,9 @@ div.tagsinput span.tag a {
   margin-bottom: 2rem;
 }
 
-.auth .brand-logo img {
-  width: 150px;
-}
+/* .auth .brand-logo img {
+  width: 100px;
+} */
 
 .auth form .form-group {
   margin-bottom: 1.5rem;
@@ -28819,7 +28819,6 @@ div.tagsinput span.tag a {
 
 .navbar .navbar-brand-wrapper .navbar-brand img {
   max-width: 100%;
-  height: 34px;
   margin: auto;
   vertical-align: middle;
 }

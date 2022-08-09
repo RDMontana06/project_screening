@@ -91,22 +91,22 @@
 														<button type="button" class="btn btn-icon btn-danger btn-sm cancelBtn"
 															data-id="{{ $projectDetails->id }}" id="reject{{ $projectDetails->id }}" title="Reject"
 															onclick="rejectProj(this)">
-															<i style="margin-left: -1px;" class="ti-close"></i>
+															<i class="ti-close"></i>
 														</button>
 														<button type="button" class="btn btn-icon btn-success btn-sm approveBtn"
 															data-id="{{ $projectDetails->id }}" data-toggle="modal" id="approved{{ $projectDetails->id }}"
 															data-target="#approvalModal" title="Approve" onclick="getRow(this)">
-															<i style="margin-left: -1px;" class="ti-check"></i>
+															<i class="ti-check"></i>
 														</button>
 														<button type="button" class="btn btn-icon btn-secondary btn-sm approveBtn"
 															data-id="{{ $projectDetails->id }}" id="buyOut{{ $projectDetails->id }}" title="Proceed to Buyout"
 															onclick="forBuyOut(this)">
-															<i style="margin-left: -3px;" class="ti-arrow-up"></i>
+															<i  class="ti-arrow-up"></i>
 														</button>
 													@endif
 													<button type="button" data-toggle="modal" data-target="#viewProject{{ $projectDetails->id }}"
 														class="btn btn-icon btn-info btn-sm" title="View Project">
-														<i style="margin-left: -1px;" class="ti-eye"></i>
+														<i class="ti-eye"></i>
 													</button>
 												</td>
 											</tr>

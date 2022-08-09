@@ -37,7 +37,7 @@
 	<div class="container-scroller">
 		@include('layouts.nav')
 		<div class="container-fluid page-body-wrapper">
-			@include('layouts.user_sidebar')
+			{{-- @include('layouts.user_sidebar') --}}
 			@yield('content')
 		</div>
 	</div>

@@ -1,5 +1,6 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('user', 'UserManagementController@index')->name('user');
 
     Route::get('projectScreening', 'ProjectController@projectIndex')->name('projectScreening');
     Route::get('get-projects', 'ProjectController@projScrenningShow');
@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('saveBuyoutDetails/{id}', 'BuyoutController@view');
     Route::post('updateBuyoutCompany', 'BuyoutController@updateBuyout');
     Route::post('buyout/view/savePayment/{proj_id}/{bo_id}', 'BuyoutController@savePayment');
+
+    Route::get('user', 'UserManagementController@index');
 
 
 

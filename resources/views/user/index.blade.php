@@ -1,16 +1,18 @@
-@extends('layouts.user_layout')
+@extends('layouts.app')
 
 @section('content')
-	<div class="main-panel">
-		<div class="content-wrapper">
-			<div class="row">
-				<div class="col-md-12 grid-margin">
+<div class="content-wrapper">
+	<div class="row justify-content-center">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header bg-gray text-dark mb-3 ">{{ __('Register') }}</div>
 
-					<h1>Users</h1>
+				<div class="card-body">
+					<h5>Users</h5>
 				</div>
 			</div>
 		</div>
-		@include('layouts.footer')
 	</div>
-	</div>
+</div>
+	
 @endsection
