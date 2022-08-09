@@ -47,7 +47,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <h4 class="card-title">Buyout History</h4>
                         <div class="table-responsive">
                         
@@ -72,7 +72,7 @@
                                 
                             </table>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 @include('buyout.buyout_payment')
                 @include('buyout.view_payment')
