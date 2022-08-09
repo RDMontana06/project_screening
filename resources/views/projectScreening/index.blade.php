@@ -95,12 +95,12 @@
 													@if ($projectDetails->status == 'Pending')
 														<button type="button" class="btn btn-icon btn-danger btn-sm cancelBtn" id="{{ $projectDetails->id }}"
 															title="Cancel Project" onclick="cancelProj(this.id)">
-															<i class="ti-close"></i>
+															<span class="ti-close"></span>
 														</button>
 													@endif
 													<button type="button" data-toggle="modal" data-target="#viewProject{{ $projectDetails->id }}"
 														class="btn btn-icon btn-info btn-sm" title="View Project">
-														<i class="ti-eye"></i>
+															<span class="ti-eye"></span>
 													</button>
 													@include('projectScreening.show_project')
 												</td>
