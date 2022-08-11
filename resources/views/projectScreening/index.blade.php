@@ -44,7 +44,7 @@
 							<h4 class="font-weight-bold d-flex justify-content-start align-items-center">Project Screening
 								<button type="button" class="btn btn-dark btn-icon-text btn-rounded btn-sm ml-2" data-toggle="modal"
 									data-target="#projectModal">
-									<i class="ti-plus btn-icon-prepend"></i>Add Project
+									<span class="ti-plus btn-icon-prepend"></span>Add Project
 								</button>
 							</h4>
 						</div>

@@ -7,14 +7,14 @@
 				<div class="col-md-12 grid-margin">
 					<div class="row">
 						<div class="col-12 col-xl-8 mb-4 mb-xl-0">
-							<h3 class="font-weight-bold">Buyout</h3>
+							<h3 class="font-weight-bold">Buyout Module</h3>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="card">
 				<div class="card-header bg-white text-dark mb-3 ">
-					<h4 class="font-weight-bold d-flex justify-content-start align-items-center">Buyout Projects
+					<h4 class="font-weight-bold d-flex justify-content-start align-items-center"> Projects
 					</h4>
 				</div>
 				<div class="card-body">
@@ -70,7 +70,7 @@
 											@endif
 											@if(count($projectDetails->bo_companies) == 0)
 												<button type="button" data-toggle="modal" data-id="{{ $projectDetails->id }}" class="btn btn-outline-warning btn-rounded btn-icon buyoutDetails" title="Create Buyout">
-													<span  class="ti-pencil-alt"></span>
+													<span class="ti-pencil-alt"></span>
 												</button>
 											@endif
 											

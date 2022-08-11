@@ -20,7 +20,7 @@
 		</li>
 		<li class="nav-item  @if(Route::currentRouteName() == 'buyout' || Route::currentRouteName() == 'buyout_view') active @endif">
 			<a class="nav-link" href="{{ route('buyout') }}">
-				<i class="ti-hand-point-up menu-icon"></i>
+				<i class="ti-money menu-icon"></i>
 				<span class="menu-title">Buyout</span>
 			</a>
 		</li>

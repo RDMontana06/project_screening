@@ -37,6 +37,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('buyout/view/savePayment/{proj_id}/{bo_id}', 'BuyoutController@savePayment');
 
     Route::get('user', 'UserManagementController@index');
+    Route::post('saveUser', 'UserManagementController@save')->name('saveUser');
+    Route::post('updateUser', 'UserManagementController@update')->name('updateUser');
+
+
+
 
 
 

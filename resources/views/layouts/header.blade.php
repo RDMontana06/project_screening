@@ -77,6 +77,7 @@
 	@yield('psScript')
 	@yield('paScript')
 	@yield('buyoutScripts')
+	@yield('userScript')
 </body>
 
 </html>

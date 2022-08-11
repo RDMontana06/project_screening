@@ -2,15 +2,18 @@
 <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
+    <form class="forms-sample" method="post" action="newProject" enctype="multipart/form-data">
+        {{csrf_field()}}
       <div class="modal-header">
-        <h4 class="modal-title" id="projectModalLabel">New Project</h4>
+      
+        <h4 class="modal-title" id="projectModalLabel">New Project
+         <button type="submit" class="btn btn-info btn-sm"><span class="ti-save"></span> Save</button>
+        </h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form class="forms-sample" method="post" action="newProject" enctype="multipart/form-data">
-        {{csrf_field()}}
             {{-- <div class="form-group">
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
@@ -23,19 +26,19 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="projectName">Project Name</label>
-                        <input type="text" class="form-control" id="projectName" name="project_name" placeholder="Project Name">
+                        <input type="text" class="form-control form-control-sm" id="projectName" name="project_name" placeholder="Project Name">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="projectType">Project Type</label>
-                        <input type="text" class="form-control" id="projectType" name="project_type" placeholder="Project Type">
+                        <input type="text" class="form-control form-control-sm" id="projectType" name="project_type" placeholder="Project Type">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="location">Location</label>
-                        <input type="text" class="form-control" id="location" name="location" placeholder="Location">
+                        <input type="text" class="form-control form-control-sm" id="location" name="location" placeholder="Location">
                     </div>
                 </div>
             </div>
@@ -45,7 +48,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="type">Type</label>
-                        <select class="form-control" id="SelectType" name="type">
+                        <select class="form-control form-control-sm" id="SelectType" name="type">
                             <option value="">-- Select Type --</option>
                             <option value="New">New</option>
                             <option value="Existing">Existing</option>
@@ -54,7 +57,7 @@
                     </div>
                     <div class="form-group" id="inputCompany">
                         <label for="companyName">Company Name</label>
-                        <input type="text" class="form-control" id="companyName" name="company_name" placeholder="Company Name">
+                        <input type="text" class="form-control form-control-sm" id="companyName" name="company_name" placeholder="Company Name">
                     </div>
                     <div class="form-group" id="selectCompany">
                         <select class="js-example-basic-single" name="company_name" style="width:100%;">
@@ -66,7 +69,7 @@
                   </div>
                     <div class="form-group">
                         <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                        <input type="text" class="form-control form-control-sm" id="address" name="address" placeholder="Address">
                     </div>
                     
                 </div>
@@ -79,13 +82,13 @@
                             <label for="contactNum">Contact Number(s)
                             {{-- <button type="button" class="btn btn-dark btn-sm" onclick="addNumber()"><span class="ti-plus"></span></button> --}}
                             </label>
-                            <input type="text" class="form-control" id="contactNum" name="contactNum[]" placeholder="Contact Number">
+                            <input type="text" class="form-control form-control-sm" id="contactNum" name="contactNum[]" placeholder="Contact Number">
                         </div>
                         <div class="form-group">
                             <label for="contactPerson">Contact Person(s)
                             {{-- <button type="button" class="btn btn-dark btn-sm" onclick="addContactPer()"><span class="ti-plus"></span></button> --}}
                             </label>
-                            <input type="text" class="form-control" id="contactPerson" name="contactPerson[]" placeholder="Contact Person">
+                            <input type="text" class="form-control form-control-sm" id="contactPerson" name="contactPerson[]" placeholder="Contact Person">
                         </div>
                     </div>
                     
@@ -95,24 +98,24 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="approvedBudget">Approved Budget</label>
-                        <input type="number" class="form-control" id="approvedBudget" name="approved_budget" placeholder="Approved Budget">
+                        <input type="number" class="form-control form-control-sm" id="approvedBudget" name="approved_budget" placeholder="Approved Budget">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Project Details</label>
-                        <input type="file" name="file[]" class="form-control" multiple>
+                        <input type="file" name="file[]" class="form-control form-control-sm" multiple>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="remarks">Remarks</label>
-                <textarea class="form-control" id="remarks" name="remarks" rows="4"></textarea>
+                <textarea class="form-control form-control-sm" id="remarks" name="remarks" rows="4"></textarea>
             </div>
             
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-info">Save changes</button>
+        {{-- <button type="submit" class="btn btn-info"><span class="ti-save"></span> Save</button> --}}
       </div>
       </form>
     </div>
