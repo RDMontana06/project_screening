@@ -27,6 +27,6 @@ class HomeController extends Controller
     {
 
         $user = User::with('user_roles.roles')->where('id', auth()->user()->id)->first();
-        return view('layouts.header', ['user' => $user]);
+        return view('layouts.dashboard', ['user' => $user]);
     }
 }
