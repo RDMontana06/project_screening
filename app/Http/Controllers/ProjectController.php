@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Attachment;
 use App\Project;
 use App\Contact;
+use App\User;
 use Alert;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,8 @@ class ProjectController extends Controller
     {
         // dd($request);
         $projects = Project::with('attachment', 'contact')->get();
-        return view($request->path().'.index', ['projects' => $projects]);
+        $user = User::with('user_roles.roles')->where('id', auth()->user()->id)->first();
+        return view($request->path().'.index', ['projects' => $projects, 'user' => $user]);
     }
     public function projScrenningSave(Request $request)
     {

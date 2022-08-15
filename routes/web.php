@@ -38,7 +38,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('user', 'UserManagementController@index');
     Route::post('saveUser', 'UserManagementController@save')->name('saveUser');
-    Route::post('updateUser', 'UserManagementController@update')->name('updateUser');
+    Route::post('updateUser/{id}', 'UserManagementController@update');
+    Route::post('disableUser/{id}', 'UserManagementController@disable');
+    Route::post('activateUser/{id}', 'UserManagementController@enable');
+    Route::post('resetPass/{id}', 'UserManagementController@reset');
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-<div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="editUser" aria-hidden="true">
+<div class="modal fade" id="editUser{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="editUser" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,52 +8,27 @@
         </button>
       </div>
         <div class="modal-body">
-           <form method="POST" action="editUser/{{ $user->id }}">
+           <form method="POST" action="updateUser/{{ $user->id }}">
             @csrf
-
             <div class="form-group row">
-                <label for="name">{{ __('Name') }}</label>
-                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} form-control-lg" name="name" value="{{ old('name') }}" required autofocus>
-
-                @if ($errors->has('name'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('name') }}</strong>
-                    </span>
-                @endif
+                <label class="" for="first_name">Name</label>
+                <input value='{{ $user->name }}' type="text" name="name" class="form-control">
             </div>
-
             <div class="form-group row">
-                <label for="email">{{ __('Email Address') }}</label>
-                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} form-control-lg" name="email" value="{{ old('email') }}" required>
-
-                @if ($errors->has('email'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                @endif
+                <label for="roles">Roles</label>
+                <select class="form-control form-control-lg js-example-basic-multiple" name="role[]" multiple="multiple" placeholder="Select Roles" style="width:100% !important;">
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->id }}"
+                            {{ in_array($role->id, $user->user_roles->pluck('role_id')->toArray())? 'selected' : ''}}>
+                            {{ $role->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
-
-            <div class="form-group row">
-                <label for="password">{{ __('Password') }}</label>
-                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} form-control-lg" name="password" required>
-
-                @if ($errors->has('password'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
-            </div>
-
-            <div class="form-group row">
-                <label for="password-confirm">{{ __('Confirm Password') }}</label>
-                <input id="password-confirm" type="password" class="form-control form-control-lg" name="password_confirmation" required>
-            </div>
-
-        
         </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">
-           <span class="ti-save"></span> {{ __('Save') }}
+        <button type="submit" class="btn btn-primary btn-sm">
+           <span class="ti-save"></span> Save Changes
         </button>
       </div>
       </form>

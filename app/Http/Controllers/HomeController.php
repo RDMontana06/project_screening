@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Roles;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -24,7 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.dashboard');
-        //return redirect()->route('index');
+
+        $user = User::with('user_roles.roles')->where('id', auth()->user()->id)->first();
+        return view('layouts.header', ['user' => $user]);
     }
 }

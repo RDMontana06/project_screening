@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\BoCompany;
 use App\Payment;
+use App\User;
 use App\PaymentAttachment;
 use Alert;
 use Validator;
@@ -14,14 +15,15 @@ class BuyoutController extends Controller
 {
     public function index()
     {
+        $user = User::with('user_roles.roles')->where('id', auth()->user()->id)->first();
         $projects = Project::with('attachment', 'contact', 'bo_companies')->where('status', 'Buyout')->get();
-        return view('buyout.index', ['projects' => $projects]);
+        return view('buyout.index', ['projects' => $projects, 'user' => $user]);
     }
     public function view(Request $request, $id){
         // dd($id);
         $buyouts = BoCompany::with('user', 'payments' )->where('project_id', $id)->orderBy('id', 'desc')->get();
-        // dd($buyouts);
-        return view('buyout.view', ['buyouts' => $buyouts]);
+        $user = User::with('user_roles.roles')->where('id', auth()->user()->id)->first();
+        return view('buyout.view', ['buyouts' => $buyouts, 'user' => $user]);
     }
     public function updateBuyout(Request $request){
 

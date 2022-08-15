@@ -20,22 +20,18 @@
 					<img src="{{ asset('images/faces/face3.jpg') }}" alt="profile" />
 				</a>
 				<div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-					{{-- <a class="dropdown-item" href="{{ url('register') }}">
-						<i class="ti-user text-primary"></i>
-						{{ __('Create Account') }}
-					</a> --}}
-					<a class="dropdown-item" href="{{ url('user') }}">
-						<i class="ti-user text-primary"></i>
-						{{ __('User Management') }}
-					</a>
+					@if (in_array(1, $user->user_roles->pluck('role_id')->toArray()))
+						<a class="dropdown-item" href="{{ url('user') }}">
+							<i class="ti-user text-primary"></i>
+							{{ __('User Management') }}
+						</a>
+					@endif
 					<a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 						<i class="ti-power-off text-primary"></i>
 						{{ __('Logout') }}
 					</a>
 					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 						@csrf
-					</form>
-					
 					</form>
 				</div>
 			</li>
