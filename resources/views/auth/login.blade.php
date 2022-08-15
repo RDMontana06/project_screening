@@ -1,4 +1,4 @@
-@extends('layouts.app_login')
+@extends('layouts.app_auth')
 
 @section('content')
 <div class="container-scroller">
