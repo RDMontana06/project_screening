@@ -144,12 +144,12 @@
 	  divInput += '<div class="form-group">';
 	  divInput += '<label for="companyName">Contact Number(s)</label>';
 	  divInput +=
-	   '<input type="text" class="form-control" id="contactNum" name="contactNum[]" placeholder="Contact Number">';
+	   '<input type="text" class="form-control" id="contactNum" name="contactNum[]" placeholder="Contact Number" required>';
 	  divInput += '</div>';
 	  divInput += '<div class="form-group">';
 	  divInput += '<label for="companyName">Contact Person(s)</label>';
 	  divInput +=
-	   '<input type="text" class="form-control" id="contactPerson" name="contactPerson[]" placeholder="Contact Person">';
+	   '<input type="text" class="form-control" id="contactPerson" name="contactPerson[]" placeholder="Contact Person" required>';
 	  divInput += '</div>';
 	  divInput += '<div class="form-group">';
 	  // divInput += '<label for="action">Action</label>'; 
@@ -178,12 +178,12 @@
 	  divInputEdit += '<div class="col-md-5">';
 	  divInputEdit += '<label for="companyName">Contact Number(s)</label>';
 	  divInputEdit +=
-	   '<input type="text" class="form-control" id="contactNum" name="contactNum[]" placeholder="Contact Number">';
+	   '<input type="text" class="form-control" id="contactNum" name="contactNum[]" placeholder="Contact Number" required>';
 	  divInputEdit += '</div>';
 	  divInputEdit += '<div class="col-md-5">';
 	  divInputEdit += '<label for="companyName">Contact Person(s)</label>';
 	  divInputEdit +=
-	   '<input type="text" class="form-control" id="contactPerson" name="contactPerson[]" placeholder="Contact Person">';
+	   '<input type="text" class="form-control" id="contactPerson" name="contactPerson[]" placeholder="Contact Person" required>';
 	  divInputEdit += '</div>';
 	  divInputEdit += '<div class="col-md-2">';
 	  divInputEdit += '<label for="action">Action</label>';

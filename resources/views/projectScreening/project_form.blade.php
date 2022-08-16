@@ -26,19 +26,19 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="projectName">Project Name</label>
-                        <input type="text" class="form-control form-control-sm" id="projectName" name="project_name" placeholder="Project Name">
+                        <input type="text" class="form-control form-control-sm" id="projectName" name="project_name" placeholder="Project Name" required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="projectType">Project Type</label>
-                        <input type="text" class="form-control form-control-sm" id="projectType" name="project_type" placeholder="Project Type">
+                        <input type="text" class="form-control form-control-sm" id="projectType" name="project_type" placeholder="Project Type" required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="location">Location</label>
-                        <input type="text" class="form-control form-control-sm" id="location" name="location" placeholder="Location">
+                        <input type="text" class="form-control form-control-sm" id="location" name="location" placeholder="Location" required>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="type">Type</label>
-                        <select class="form-control form-control-sm" id="SelectType" name="type">
+                        <select class="form-control form-control-sm" id="SelectType" name="type" required>
                             <option value="">-- Select Type --</option>
                             <option value="New">New</option>
                             <option value="Existing">Existing</option>
@@ -57,10 +57,10 @@
                     </div>
                     <div class="form-group" id="inputCompany">
                         <label for="companyName">Company Name</label>
-                        <input type="text" class="form-control form-control-sm" id="companyName" name="company_name" placeholder="Company Name">
+                        <input type="text" class="form-control form-control-sm" id="companyName" name="company_name" placeholder="Company Name" required>
                     </div>
                     <div class="form-group" id="selectCompany">
-                        <select class="js-example-basic-single" name="company_name" style="width:100%;">
+                        <select class="js-example-basic-single" name="company_name" style="width:100%;" required>
                             <option value="option" disabled selected>Select Company</option>
                                 @foreach($projects as $project)
                                     <option value="{{ $project->company_name }}">{{ $project->company_name}}</option>
@@ -69,7 +69,7 @@
                   </div>
                     <div class="form-group">
                         <label for="address">Address</label>
-                        <input type="text" class="form-control form-control-sm" id="address" name="address" placeholder="Address">
+                        <input type="text" class="form-control form-control-sm" id="address" name="address" placeholder="Address" required>
                     </div>
                     
                 </div>
@@ -82,13 +82,13 @@
                             <label for="contactNum">Contact Number(s)
                             {{-- <button type="button" class="btn btn-dark btn-sm" onclick="addNumber()"><span class="ti-plus"></span></button> --}}
                             </label>
-                            <input type="text" class="form-control form-control-sm" id="contactNum" name="contactNum[]" placeholder="Contact Number">
+                            <input type="text" class="form-control form-control-sm" id="contactNum" name="contactNum[]" placeholder="Contact Number" required>
                         </div>
                         <div class="form-group">
                             <label for="contactPerson">Contact Person(s)
                             {{-- <button type="button" class="btn btn-dark btn-sm" onclick="addContactPer()"><span class="ti-plus"></span></button> --}}
                             </label>
-                            <input type="text" class="form-control form-control-sm" id="contactPerson" name="contactPerson[]" placeholder="Contact Person">
+                            <input type="text" class="form-control form-control-sm" id="contactPerson" name="contactPerson[]" placeholder="Contact Person" required>
                         </div>
                     </div>
                     
@@ -98,19 +98,19 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="approvedBudget">Approved Budget</label>
-                        <input type="number" class="form-control form-control-sm" id="approvedBudget" name="approved_budget" placeholder="Approved Budget">
+                        <input type="number" class="form-control form-control-sm" id="approvedBudget" name="approved_budget" placeholder="Approved Budget" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Project Details</label>
-                        <input type="file" name="file[]" class="form-control form-control-sm" multiple>
+                        <input type="file" name="file[]" class="form-control form-control-sm" multiple required>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="remarks">Remarks</label>
-                <textarea class="form-control form-control-sm" id="remarks" name="remarks" rows="4"></textarea>
+                <textarea class="form-control form-control-sm" id="remarks" name="remarks" rows="4" required></textarea>
             </div>
             
       </div>
