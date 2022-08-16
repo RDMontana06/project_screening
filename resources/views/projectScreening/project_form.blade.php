@@ -2,12 +2,8 @@
 <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
-    <form class="forms-sample" method="post" action="newProject" enctype="multipart/form-data">
-        {{csrf_field()}}
       <div class="modal-header">
-      
         <h4 class="modal-title" id="projectModalLabel">New Project
-         <button type="submit" class="btn btn-info btn-sm"><span class="ti-save"></span> Save</button>
         </h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -22,6 +18,8 @@
                     <input type="text" class="form-control" placeholder="Reference Code" aria-label="refcode" aria-describedby="basic-addon1" name="ref_code" id="refCode">
                 </div>
             </div> --}}
+            <form class="forms-sample" method="post" action="newProject" enctype="multipart/form-data">
+                {{csrf_field()}}
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -57,11 +55,11 @@
                     </div>
                     <div class="form-group" id="inputCompany">
                         <label for="companyName">Company Name</label>
-                        <input type="text" class="form-control form-control-sm" id="companyName" name="company_name" placeholder="Company Name" required>
+                        <input type="text" class="form-control form-control-sm" id="companyName" name="company_name" placeholder="Company Name">
                     </div>
                     <div class="form-group" id="selectCompany">
-                        <select class="js-example-basic-single" name="company_name" style="width:100%;" required>
-                            <option value="option" disabled selected>Select Company</option>
+                        <select class="js-example-basic-single" id="selectComp" name="comp" style="width:100%;">
+                            <option value="selected" disabled selected>Select Company</option>
                                 @foreach($projects as $project)
                                     <option value="{{ $project->company_name }}">{{ $project->company_name}}</option>
                                 @endforeach
@@ -80,13 +78,11 @@
                     <div id="contactDetails">
                         <div class="form-group" id="">
                             <label for="contactNum">Contact Number(s)
-                            {{-- <button type="button" class="btn btn-dark btn-sm" onclick="addNumber()"><span class="ti-plus"></span></button> --}}
                             </label>
                             <input type="text" class="form-control form-control-sm" id="contactNum" name="contactNum[]" placeholder="Contact Number" required>
                         </div>
                         <div class="form-group">
                             <label for="contactPerson">Contact Person(s)
-                            {{-- <button type="button" class="btn btn-dark btn-sm" onclick="addContactPer()"><span class="ti-plus"></span></button> --}}
                             </label>
                             <input type="text" class="form-control form-control-sm" id="contactPerson" name="contactPerson[]" placeholder="Contact Person" required>
                         </div>
@@ -115,7 +111,7 @@
             
       </div>
       <div class="modal-footer">
-        {{-- <button type="submit" class="btn btn-info"><span class="ti-save"></span> Save</button> --}}
+        <button type="submit" class="btn btn-info"><span class="ti-save"></span> Save</button>
       </div>
       </form>
     </div>

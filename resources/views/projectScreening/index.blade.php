@@ -39,6 +39,7 @@
 							</div>
 						</div>
 					</div>
+					@include('errors')
 					<div class="card">
 						<div class="card-header bg-white text-dark mb-3 ">
 							<h4 class="font-weight-bold d-flex justify-content-start align-items-center">Project Screening
@@ -144,12 +145,12 @@
 	  divInput += '<div class="form-group">';
 	  divInput += '<label for="companyName">Contact Number(s)</label>';
 	  divInput +=
-	   '<input type="text" class="form-control" id="contactNum" name="contactNum[]" placeholder="Contact Number" required>';
+	   '<input type="text" class="form-control"  name="contactNum[]" placeholder="Contact Number">';
 	  divInput += '</div>';
 	  divInput += '<div class="form-group">';
 	  divInput += '<label for="companyName">Contact Person(s)</label>';
 	  divInput +=
-	   '<input type="text" class="form-control" id="contactPerson" name="contactPerson[]" placeholder="Contact Person" required>';
+	   '<input type="text" class="form-control"  name="contactPerson[]" placeholder="Contact Person">';
 	  divInput += '</div>';
 	  divInput += '<div class="form-group">';
 	  // divInput += '<label for="action">Action</label>'; 
@@ -178,7 +179,7 @@
 	  divInputEdit += '<div class="col-md-5">';
 	  divInputEdit += '<label for="companyName">Contact Number(s)</label>';
 	  divInputEdit +=
-	   '<input type="text" class="form-control" id="contactNum" name="contactNum[]" placeholder="Contact Number" required>';
+	   '<input type="text" class="form-control" id="contactNum" name="contactNum[]" placeholder="Contact Number">';
 	  divInputEdit += '</div>';
 	  divInputEdit += '<div class="col-md-5">';
 	  divInputEdit += '<label for="companyName">Contact Person(s)</label>';
@@ -257,15 +258,29 @@
 	   elems[i].style.display = 'none'
 	  }
 	  console.log('Selected');
-	  if (this.selectedIndex === 0) {} else if (this.selectedIndex === 1) {
+	  const selInput = document.getElementById('selectComp');
+	  let compName = document.querySelector("#companyName");
+	  if (this.selectedIndex === 0) {
+
+	  }else if ((this.selectedIndex === 1) || (this.selectedIndex === 3)) {
 	   document.querySelector('#inputCompany').style.display = 'block';
+	   document.getElementById("companyName").required = true;
+	   document.getElementById("selectComp").required = false;
+	   document.getElementById('select2-selectComp-container').innerHTML = "Select Company";
 	   document.querySelector('#selectCompany').style.display = 'none';
+	   reset("selectComp");
 	  } else if (this.selectedIndex === 2) {
 	   document.querySelector('#selectCompany').style.display = 'block';
+	    document.getElementById("companyName").required = false;
+	   document.getElementById("selectComp").required = true;
 	   document.querySelector('#inputCompany').style.display = 'none';
-	  } else if (this.selectedIndex === 3) {
-	   document.querySelector('#inputCompany').style.display = 'block';
-	  }
+	   reset("companyName");
+	  } 
 	 }, false);
+
+	 function reset(id_input)
+	 {
+		document.querySelector("#"+id_input).value = "";
+	 }
 	</script>
 @endsection

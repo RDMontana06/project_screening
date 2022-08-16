@@ -32,7 +32,7 @@ class ProjectController extends Controller
             'location' => 'required',
             'contactNum' => 'required',
             'contactPerson' => 'required',
-            'company_name' => 'required',
+            // 'company_name' => 'required',
             'address' => 'required',
             'type' =>  'required',
             'approved_budget' => 'required',
