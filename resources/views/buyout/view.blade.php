@@ -29,50 +29,68 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <tr>
-                                    <td width="30%">Company Name:</td>
-                                    <td class="font-weight-bold">{{ $buyouts[0]->company_name }}</td>
+                                    <td width="30%" class="font-weight-bold">Company Name</td>
+                                    <td>{{ $buyouts[0]->company_name }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Contact Person:</td>
-                                    <td class="font-weight-bold">{{ $buyouts[0]->contact_person }}</td>
+                                    <td class="font-weight-bold">Contact Person</td>
+                                    <td>{{ $buyouts[0]->contact_person }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Contact Number:</td>
-                                    <td class="font-weight-bold">{{ $buyouts[0]->contact_number }}</td>
+                                    <td class="font-weight-bold">Contact Number</td>
+                                    <td>{{ $buyouts[0]->contact_number }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Total Amount:</td>
-                                    <td class="font-weight-bold">{{ $buyouts[0]->total_amt  }}</td>
+                                    <td class="font-weight-bold">Total Amount</td>
+                                    <td>{{ number_format($buyouts[0]->total_amt, 2)  }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Running Balance</td>
+                                    <td>
+                                        <span class="badge badge-success">
+                                            {{ number_format($buyouts[0]->total_amt - ($buyouts[0]->payments)->sum('amount') )}}
+                                        </span>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
                     </div>
-                    {{-- <div class="col-md-6">
-                        <h4 class="card-title">Buyout History</h4>
+                    <div class="col-md-6">
+                        <h4 class="card-title">Project Details</h4>
                         <div class="table-responsive">
                         
-                            <table class="table table-striped">
+                            <table class="table table-striped table-hover">
                                 <tr>
-                                    <th>Company Name</th>
-                                    <th>Contact Person</th>
-                                    <th>Contact Number</th>
-                                    <th>Total Amt</th>
-                                    <th>Edited By</th>
+                                    <td width="30%" class="font-weight-bold">Project Name</td>
+                                    <td>{{ $buyouts[0]->project->project_name }}</td>
                                 </tr>
-                                @foreach ($buyouts as $buy)
-                                    <tr>
-                                        <td>{{ $buy->company_name }}</td>
-                                        <td>{{ $buy->contact_person }}</td>
-                                        <td>{{ $buy->contact_number }}</td>
-                                        <td>{{ $buy->total_amt }}</td>
-                                        <td>{{ $buy->user->name }}</td>
-                                    </tr>
-                                @endforeach
-                                
-                                
+                                <tr>
+                                    <td class="font-weight-bold">Project Type</td>
+                                    <td>{{ $buyouts[0]->project->project_type }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Reference Code</td>
+                                    <td>{{ $buyouts[0]->project->ref_code }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Location</td>
+                                    <td>{{ $buyouts[0]->project->location }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Company Name</td>
+                                    <td>{{ $buyouts[0]->project->company_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Type</td>
+                                    <td>{{ $buyouts[0]->project->type }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Approved Budget</td>
+                                    <td>{{ number_format($buyouts[0]->project->approved_budget, 2) }}</td>
+                                </tr>
                             </table>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
                 @include('buyout.buyout_payment')
                 @include('buyout.view_payment')

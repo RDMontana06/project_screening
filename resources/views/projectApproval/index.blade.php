@@ -5,40 +5,6 @@
 		<div class="content-wrapper">
 			<div class="row">
 				<div class="col-md-12 grid-margin">
-					<div class="row">
-						<div class="col-md-3 mb-4 stretch-card transparent">
-							<div class="card card-tale">
-								<div class="card-body">
-									<p class="mb-4">Approved Projects</p>
-									<p class="fs-30 mb-2">{{ $projects->where('status', 'Approved')->count() }}</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 mb-4 stretch-card transparent">
-							<div class="card card-dark-blue">
-								<div class="card-body">
-									<p class="mb-4">Rejected Projects</p>
-									<p class="fs-30 mb-2">{{ $projects->where('status', 'Rejected')->count() }}</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 mb-4 stretch-card transparent">
-							<div class="card card-light-blue">
-								<div class="card-body">
-									<p class="mb-4">Pending Approval Projects</p>
-									<p class="fs-30 mb-2">{{ $projects->where('status', 'Pending')->count() }}</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 mb-4 stretch-card transparent">
-							<div class="card card-light-danger">
-								<div class="card-body">
-									<p class="mb-4">Total Projects</p>
-									<p class="fs-30 mb-2">{{ $projects->count() }}</p>
-								</div>
-							</div>
-						</div>
-					</div>
 					<div class="card">
 						<div class="card-header bg-white text-dark mb-3 ">
 							<h4 class="font-weight-bold d-flex justify-content-start align-items-center">Project Approval

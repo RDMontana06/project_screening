@@ -9,6 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
+        @include('errors')
         <form action="savePayment/{{ $buyouts[0]->project_id }}/{{ $buyouts[0]->id }}" method="POST" enctype="multipart/form-data">
          {{csrf_field()}}
           <div class="form-group">

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Roles;
-use Illuminate\Http\Request;
 use App\User;
+use App\Roles;
+use App\Project;
+use App\BoCompany;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -27,6 +29,11 @@ class HomeController extends Controller
     {
 
         $user = User::with('user_roles.roles')->where('id', auth()->user()->id)->first();
-        return view('layouts.dashboard', ['user' => $user]);
+        $projects = Project::with('attachment', 'contact', 'bo_companies')->get();
+
+        $buyouts = BoCompany::with('user', 'payments', 'project')->orderBy('total_amt', 'DESC')->get();
+        // dd($buyouts);
+
+        return view('layouts.dashboard', ['projects' => $projects, 'user' => $user, 'buyouts' => $buyouts]);
     }
 }

@@ -15,8 +15,12 @@
 			<div class="card">
 				<div class="card-header bg-white text-dark mb-3 ">
 					<h4 class="font-weight-bold d-flex justify-content-start align-items-center"> Projects
+						<button type="button" class="btn btn-outline-info btn-icon-text btn-rounded btn-sm ml-2" data-toggle="modal" data-target="#buyoutHistory">
+							<span class="ti-new-window btn-icon-prepend"></span>Buyout History
+						</button>
 					</h4>
 				</div>
+				@include('errors')
 				<div class="card-body">
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered " id="buyout-tbl">
@@ -50,7 +54,7 @@
 											@elseif ($projectDetails->status == 'Approved')
 												<label id="approvalStatus{{ $projectDetails->id }}"
 													class="badge badge-success">{{ $projectDetails->status }}</label>
-											@elseif ($projectDetails->status == 'For Buyout')
+											@elseif ($projectDetails->status == 'Buyout')
 												<label id="approvalStatus{{ $projectDetails->id }}"
 													class="badge badge-primary">{{ $projectDetails->status }}</label>
 											@else
@@ -85,6 +89,7 @@
 			</div>
 		</div>
 		@include('buyout.buyout_details')
+		@include('buyout.buyout_hist')
 		@include('layouts.footer')
 </div>
 @endsection

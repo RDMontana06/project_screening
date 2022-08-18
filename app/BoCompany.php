@@ -12,6 +12,9 @@ class BoCompany extends Model
         return $this->belongsTo(User::class,'created_by', 'id');
     }
     public function payments(){
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class)->orderBy('created_at', 'desc');
+    }
+    public function project(){
+        return $this->belongsTo(Project::class);
     }
 }

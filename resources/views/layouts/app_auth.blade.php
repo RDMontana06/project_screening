@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>PSM System Login</title>
+  <title>{{ config('app.name', 'Laravel') }}</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('vendors/feather/feather.css')}}">
   <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css')}}">
@@ -16,7 +16,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{ asset('images/logo-1.svg') }}" />
+  <link rel="shortcut icon" href="{{ asset('images/PMS-LOGO-Mini.svg') }}" />
 </head>
 
 <body>

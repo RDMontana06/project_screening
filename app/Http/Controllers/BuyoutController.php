@@ -21,7 +21,8 @@ class BuyoutController extends Controller
     }
     public function view(Request $request, $id){
         // dd($id);
-        $buyouts = BoCompany::with('user', 'payments' )->where('project_id', $id)->orderBy('id', 'desc')->get();
+        $buyouts = BoCompany::with('user', 'payments', 'project')->where('project_id', $id)->orderBy('id', 'desc')->get();
+        // dd($buyouts);
         $user = User::with('user_roles.roles')->where('id', auth()->user()->id)->first();
         return view('buyout.view', ['buyouts' => $buyouts, 'user' => $user]);
     }
@@ -64,22 +65,28 @@ class BuyoutController extends Controller
         ]);
 
         $bo = BoCompany::findOrFail($b_id);
+               
         $payments = Payment::where('bo_company_id', $b_id)->sum('amount');
-        // dd($payments);
+        $status = "";
+        //  dd($payments);
         if($request->amount > $bo->total_amt ){
             Alert::error('Amount is greater than total amount!')->persistent('Dismiss');
             return back();
         }
-        // if(($request->amount + $payments) >= $bo->total_amt ){
-        //     Alert::error('Amount is greater than or equal total amount!')->persistent('Dismiss');
-        //     return back();
-        // }
+        if($bo->total_amt === $payments ){
+            $status = 'Fully Paid';
+        }else{
+            $status = 'Partial';
+        }
+        $bo->balance = $bo->total_amt - $payments;
+        $bo->status = $status;
+        $bo->save();
 
         $payment = new Payment;
         $payment->project_id = $p_id;
         $payment->amount = $request->amount;
         $payment->bo_company_id = $b_id;
-        $payment->status = 'Paid';
+        $payment->status = $status;
         $payment->save();
 
         $files = $request->file('attachment');

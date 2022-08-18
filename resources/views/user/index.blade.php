@@ -18,6 +18,7 @@
 					data-target="#user"><span class="ti-plus btn-icon-prepend"></span>Add User
 				</button>
 				</div>
+                @include('errors')
 				<div class="card-body">
 					<table class="table table-stripe table-hover" id="userTbl">
 						<thead>

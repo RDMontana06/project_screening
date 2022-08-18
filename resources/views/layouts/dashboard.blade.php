@@ -8,93 +8,132 @@
 					<div class="row">
 						<div class="col-12 col-xl-8 mb-4 mb-xl-0">
 							<h3 class="font-weight-bold">Welcome {{ Auth::user()->name }}</h3>
-							<h6 class="font-weight-normal mb-0">All systems are running smoothly! Current Date <span class="text-primary"
-									id="date"></span></h6>
+							<h6 class="font-weight-normal mb-0">All systems are running smoothly! Current Date <span class="text-primary" id="date"></span></h6>
 						</div>
-						{{-- <div class="col-12 col-xl-4">
-                 <div class="justify-content-end d-flex">
-                  <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                    <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                     <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                      <a class="dropdown-item" href="#">January - March</a>
-                      <a class="dropdown-item" href="#">March - June</a>
-                      <a class="dropdown-item" href="#">June - August</a>
-                      <a class="dropdown-item" href="#">August - November</a>
-                    </div>
-                  </div>
-                 </div>
-                </div> --}}
 					</div>
 				</div>
 			</div>
-			{{-- <div class="row">
-				<div class="col-md-6 grid-margin stretch-card">
-					<div class="card tale-bg">
-						<div class="card-people mt-auto">
-							<img src="images/dashboard/people.svg" alt="people">
-							<div class="weather-info">
-								<div class="d-flex">
-									<div>
-										<h2 class="mb-0 font-weight-normal"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
-									</div>
-									<div class="ml-2">
-										<h4 class="location font-weight-normal">Metro Manila</h4>
-										<h6 class="font-weight-normal">Philippines</h6>
-									</div>
-								</div>
+			<div class="row">
+				<div class="col-md-2 col-half-offset mb-4 stretch-card transparent">
+					<div class="card card-inverse-success ">
+						<div class="card-body">
+							<p class="mb-4">Approved Projects</p>
+							<span data-toggle="modal" data-target="#approvedList" style="cursor:pointer;" title="Approved List">
+								<p class="fs-30 mb-2">{{ $projects->where('status', 'Approved')->count() }}</p>
+							</span>
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2 col-half-offset mb-4 stretch-card transparent">
+					<div class="card card-inverse-danger">
+						<div class="card-body">
+							<p class="mb-4">Rejected Projects</p>
+							<span data-toggle="modal" data-target="#rejectedList" style="cursor:pointer;" title="Rejected List">
+								<p class="fs-30 mb-2">{{ $projects->where('status', 'Rejected')->count() }}</p>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2 col-half-offset mb-4 stretch-card transparent">
+					<div class="card card-inverse-dark">
+						<div class="card-body">
+							<p class="mb-4">Pending Approval Projects</p>
+							<span data-toggle="modal" data-target="#pendingList" style="cursor:pointer;" title="Pending List">
+								<p class="fs-30 mb-2">{{ $projects->where('status', 'Pending')->count() }}</p>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2 col-half-offset mb-4 stretch-card transparent">
+					<div class="card card-inverse-info">
+						<div class="card-body">
+							<p class="mb-4">Cancelled Projects</p>
+							<span data-toggle="modal" data-target="#cancelledList" style="cursor:pointer;" title="Cancelled List">
+								<p class="fs-30 mb-2">{{ $projects->where('status', 'Cancelled')->count() }}</p>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2 col-half-offset mb-4 stretch-card transparent">
+					<div class="card card-inverse-primary">
+						<div class="card-body">
+							<p class="mb-4">Buyout Projects</p>
+							<span data-toggle="modal" data-target="#buyoutList" style="cursor:pointer;" title="Buyout List">
+								<p class="fs-30 mb-2">{{ $projects->where('status', 'Buyout')->count() }}</p>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2 col-half-offset mb-4 stretch-card transparent">
+					<div class="card card-inverse-warning">
+						<div class="card-body">
+							<p class="mb-4">Under Development</p>
+							{{-- <p class="fs-30 mb-2">{{ $projects->where('status', 'Cancelled')->count() }}</p> --}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-7 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+						<p class="card-title mb-0">Top Projects</p>
+							<div class="table-responsive">
+								<table class="table table-striped table-borderless">
+								<thead>
+									<tr>
+									<th>Project</th>
+									<th>Approved Budget</th>
+									<th>Buyout Amount</th>
+									<th>Date Created</th>
+									</tr>  
+								</thead>
+									<tbody>
+										@foreach ($buyouts as $buyout)
+											<tr>
+												<td>{{ $buyout->project->project_name }}</td>
+												<td>{{ number_format($buyout->project->approved_budget, 2) }}</td>
+												<td>{{ number_format($buyout->total_amt, 2) }}</td>
+												<td>{{ Date('F-d-Y', strtotime($buyout->created_at)) }}</td>
+											</tr>
+										@endforeach
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 grid-margin transparent">
-					<div class="row">
-						<div class="col-md-6 mb-4 stretch-card transparent">
-							<div class="card card-tale">
-								<div class="card-body">
-									<p class="mb-4">Approved Projects</p>
-									<p class="fs-30 mb-2">4006</p>
-									<p>10.00% (30 days)</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 mb-4 stretch-card transparent">
-							<div class="card card-dark-blue">
-								<div class="card-body">
-									<p class="mb-4">Decline Projects</p>
-									<p class="fs-30 mb-2">61344</p>
-									<p>22.00% (30 days)</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-							<div class="card card-light-blue">
-								<div class="card-body">
-									<p class="mb-4">Pending Approval Projects</p>
-									<p class="fs-30 mb-2">34040</p>
-									<p>2.00% (30 days)</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 stretch-card transparent">
-							<div class="card card-light-danger">
-								<div class="card-body">
-									<p class="mb-4">Total Projects</p>
-									<p class="fs-30 mb-2">47033</p>
-									<p>0.22% (30 days)</p>
-								</div>
+				<div class="col-md-5 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+						<p class="card-title mb-0">Top Buyout Payments</p>
+							<div class="table-responsive">
+								<table class="table table-striped table-borderless">
+								<thead>
+									<tr>
+									<th>Buyout Company</th>
+									<th>Amount Paid</th>
+									<th>Total Buyout</th>
+									<th>Last Payment Date</th>
+									</tr>  
+								</thead>
+								<tbody>
+									@foreach ($buyouts as $buyout )
+										<tr>
+											<td>{{ $buyout->company_name }}</td>
+											<td>{{ number_format(($buyout->payments)->sum('amount'), 2)}}</td>
+											<td>{{ number_format($buyout->total_amt, 2)}}</td>
+											<td>{{ Date('F-d-Y', strtotime(($buyout->payments)->first()->created_at)) }}</td>
+										</tr>
+									@endforeach
+								</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div> --}}
-
-
-
-
+			</div>
 		</div>
 		<!-- content-wrapper ends -->
 		<!-- partial:partials/_footer.html -->
@@ -102,12 +141,57 @@
 		<!-- partial -->
 	</div>
 	<!-- main-panel ends -->
+	{{-- Modals --}}
+	@include('layouts.approved')
+	@include('layouts.rejected')
+	@include('layouts.pending')
+	@include('layouts.buyout')
+	@include('layouts.cancelled')
 	</div>
-	<script>
-	 n = new Date();
-	 y = n.getFullYear();
-	 m = n.getMonth() + 1;
-	 d = n.getDate();
-	 document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
-	</script>
+@endsection
+@section('dashboardScript')
+<script>
+	$(document).ready(function() {
+		$('#approved-table').DataTable({
+		pageLength: 5,
+		lengthMenu: [
+			[5, 10, 20],
+			[5, 10, 20]
+		]
+		});
+		$('#rejected-table').DataTable({
+		pageLength: 5,
+		lengthMenu: [
+			[5, 10, 20],
+			[5, 10, 20]
+		]
+		});
+		$('#pending-table').DataTable({
+		pageLength: 5,
+		lengthMenu: [
+			[5, 10, 20],
+			[5, 10, 20]
+		]
+		});
+		$('#cancelled-table').DataTable({
+		pageLength: 5,
+		lengthMenu: [
+			[5, 10, 20],
+			[5, 10, 20]
+		]
+		});
+		$('#buyout-table').DataTable({
+		pageLength: 5,
+		lengthMenu: [
+			[5, 10, 20],
+			[5, 10, 20]
+		]
+		});
+	});
+	n = new Date();
+	y = n.getFullYear();
+	m = n.getMonth() + 1;
+	d = n.getDate();
+	document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+</script>
 @endsection
