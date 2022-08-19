@@ -127,7 +127,11 @@
 											<td>{{ $buyout->company_name }}</td>
 											<td>{{ number_format(($buyout->payments)->sum('amount'), 2)}}</td>
 											<td>{{ number_format($buyout->total_amt, 2)}}</td>
-											<td>{{ Date('F-d-Y', strtotime(($buyout->payments)->first()->created_at)) }}</td>
+											<td>
+											@if (($buyout->payments)->first())
+												{{ Date('F-d-Y', strtotime(($buyout->payments)->first()->created_at)) }}
+											@endif
+											</td>
 										</tr>
 									@endforeach
 								</tbody>
