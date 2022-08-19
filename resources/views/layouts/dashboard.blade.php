@@ -91,12 +91,15 @@
 								</thead>
 									<tbody>
 										@foreach ($buyouts as $buyout)
+										@if($buyout->count() > 0)
 											<tr>
 												<td>{{ $buyout->project->project_name }}</td>
 												<td>{{ number_format($buyout->project->approved_budget, 2) }}</td>
 												<td>{{ number_format($buyout->total_amt, 2) }}</td>
 												<td>{{ Date('F-d-Y', strtotime($buyout->created_at)) }}</td>
 											</tr>
+										@endif
+											
 										@endforeach
 									</tbody>
 								</table>

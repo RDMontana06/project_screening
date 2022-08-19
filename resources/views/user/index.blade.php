@@ -20,7 +20,8 @@
 				</div>
                 @include('errors')
 				<div class="card-body">
-					<table class="table table-stripe table-hover" id="userTbl">
+                    <div class="table-responsive">
+                        <table class="table table-stripe table-hover" id="userTbl">
 						<thead>
 							<tr>
 								<th>Email</th>	
@@ -73,6 +74,8 @@
 							
 						</tbody>
 					</table>
+                    </div>
+					
 				</div>
 				@include('user.new_user')
 			</div>
