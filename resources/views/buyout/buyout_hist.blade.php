@@ -1,4 +1,4 @@
-2<!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="buyoutHistory" tabindex="-1" role="dialog" aria-labelledby="buyoutHistory" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
         <div class="table-responsive">
-            <table class="table table-stripe table-hover" id="approved-table">
+            <table class="table table-stripe table-hover" id="buyoutHist-tbl">
                 <thead>
                     <tr>
                         <th>Project Name</th>
@@ -21,14 +21,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($projects->where('status', 'Approved') as $projectDetails)
-                        <tr id='project{{ $projectDetails->id }}'>
+                {{-- {{ dd($projects) }} --}}
+                    @foreach ($projects as $projectDetails)
+                    @if (($projectDetails->bo_companies)->count())
+                       @if ($projectDetails->bo_companies[0]->status == 'Fully Paid')
+                          <tr id='project{{ $projectDetails->id }}'>
                             <td>{{ $projectDetails->project_name }}</td>
                             <td>{{ $projectDetails->project_type }}</td>
                             <td>{{ $projectDetails->type }}</td>
                             <td>{{ $projectDetails->location }}</td>
                             <td>{{ number_format($projectDetails->approved_budget) }}</td>
-                        </tr>
+                          </tr>
+                        @endif
+                    @endif
+                         
+                            
                     @endforeach
                 </tbody>
             </table>

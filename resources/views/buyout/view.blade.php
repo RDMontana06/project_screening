@@ -47,9 +47,11 @@
                                 <tr>
                                     <td class="font-weight-bold">Running Balance</td>
                                     <td>
-                                        <span class="badge badge-success">
-                                            {{ number_format($buyouts[0]->total_amt - ($buyouts[0]->payments)->sum('amount') )}}
-                                        </span>
+                                        @if ( ($buyouts[0]->payments)->sum('amount') > 0)
+                                            <span class="badge badge-success">
+                                                {{ number_format($buyouts[0]->total_amt - ($buyouts[0]->payments)->sum('amount') )}}
+                                            </span>
+                                        @endif
                                     </td>
                                 </tr>
                             </table>

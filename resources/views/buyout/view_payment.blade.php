@@ -31,8 +31,8 @@
                   <td class="text-right"><b>Total Amount:</b> {{ number_format($buyouts[0]->payments->sum('amount'), 2) }}
                   </td>
                   <td>
-                    @if ($buyouts[0]->total_amt === $buyouts[0]->payments->sum('amount'))
-                      <label class="badge badge-success">{{ $buyouts[0]->status }}</label>
+                    @if ($buyouts[0]->total_amt == $buyouts[0]->payments->sum('amount'))
+                      <label class="badge badge-success">Fully Paid</label>
                     @endif
                   </td>
                 </tr>

@@ -68,17 +68,17 @@ class BuyoutController extends Controller
                
         $payments = Payment::where('bo_company_id', $b_id)->sum('amount');
         $status = "";
-        //  dd($payments);
+        // dd($payments);
         if($request->amount > $bo->total_amt ){
             Alert::error('Amount is greater than total amount!')->persistent('Dismiss');
             return back();
         }
-        if($bo->total_amt === $payments ){
+        if($bo->balance == 0 ){
             $status = 'Fully Paid';
         }else{
-            $status = 'Partial';
+            $status = 'Paid';
         }
-        $bo->balance = $bo->total_amt - $payments;
+        $bo->balance = $bo->balance - $request->amount;
         $bo->status = $status;
         $bo->save();
 

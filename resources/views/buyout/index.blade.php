@@ -70,7 +70,6 @@
 													<span class="ti-money"></span>
 												</button>
 											</a>
-											
 											@endif
 											@if(count($projectDetails->bo_companies) == 0)
 												<button type="button" data-toggle="modal" data-id="{{ $projectDetails->id }}" class="btn btn-outline-warning btn-rounded btn-icon buyoutDetails" title="Create Buyout">
@@ -95,7 +94,7 @@
 @endsection
 @section('buyoutScripts')
 	<script>
-	 $(document).ready(function() {
+	$(document).ready(function() {
 	  $('#buyout-tbl').DataTable({
 	   pageLength: 5,
 	   lengthMenu: [
@@ -103,9 +102,16 @@
 	    [5, 10, 20]
 	   ]
 	  });
-	console.log('XXXX');
-	
-	 });
+	});
+	$(document).ready(function() {
+	  $('#buyoutHist-tbl').DataTable({
+	   pageLength: 5,
+	   lengthMenu: [
+	    [5, 10, 20],
+	    [5, 10, 20]
+	   ]
+	  });
+	});
 	 $(document).ready(function() {
 		$(document).on("click", ".buyoutDetails", function () {
 			console.log('Tetetstet');
