@@ -107,23 +107,29 @@
 	  var idContactData = parseInt(idContact) + 1;
 	  console.log(idContactData);
 
-	  var divInput = '<div id="idContactData">';
-	  divInput += '<div class="form-group">';
-	  divInput += '<label for="companyName">Contact Number(s)</label>';
-	  divInput +=
-	   '<input type="text" class="form-control"  name="contactNum[]" placeholder="Contact Number">';
-	  divInput += '</div>';
-	  divInput += '<div class="form-group">';
-	  divInput += '<label for="companyName">Contact Person(s)</label>';
-	  divInput +=
-	   '<input type="text" class="form-control"  name="contactPerson[]" placeholder="Contact Person">';
-	  divInput += '</div>';
-	  divInput += '<div class="form-group">';
-	  // divInput += '<label for="action">Action</label>'; 
-	  divInput +=
-	   '<button type="button" class="form-control btn btn-danger btn-sm" onclick="deleteRow()"><span   class="ti-trash"></span></button>';
-	  divInput += '</div>';
-	  divInput += '</div>';
+	var divInput = '<div id="idContactData">';
+	  	divInput += '<div class="row align-items-center">';
+			divInput += '<div class="col-sm-5">';
+				divInput += '<div class="form-group">';
+					divInput += '<label for="companyName">Contact Number(s)</label>';
+					divInput +='<input type="text" class="form-control"  name="contactNum[]" placeholder="Contact Number">';
+				divInput += '</div>';
+			divInput += '</div>';
+			divInput += '<div class="col-sm-5">';
+				divInput += '<div class="form-group">';
+					divInput += '<label for="companyName">Contact Person(s)</label>';
+					divInput += '<input type="text" class="form-control"  name="contactPerson[]" placeholder="Contact Person">';
+				divInput += '</div>';
+			divInput += '</div>';
+
+			divInput += '<div class="col-sm-2">';
+				divInput += '<div class="form-group d-flex vertical-align-bottom mb-0">';
+					divInput +='<button type="button" class="form-control btn btn-danger btn-sm" onclick="deleteRow()"><span   class="ti-trash"></span></button>';
+				divInput += '</div>';
+	  		divInput += '</div>';
+	  	divInput += '</div>';
+	divInput += '</div>';
+	
 	  $('#contactDetails').append(divInput);
 	 }
 
@@ -142,12 +148,12 @@
 	  console.log(idEditContactData);
 
 	  var divInputEdit = '<div class="row" id="editId-' + asd + '-' + idEditContactData + '">';
-	  divInputEdit += '<div class="col-md-5">';
+	  divInputEdit += '<div class="col-sm-6">';
 	  divInputEdit += '<label for="companyName">Contact Number(s)</label>';
 	  divInputEdit +=
 	   '<input type="text" class="form-control" id="contactNum" name="contactNum[]" placeholder="Contact Number">';
 	  divInputEdit += '</div>';
-	  divInputEdit += '<div class="col-md-5">';
+	  divInputEdit += '<div class="col-sm-6">';
 	  divInputEdit += '<label for="companyName">Contact Person(s)</label>';
 	  divInputEdit +=
 	   '<input type="text" class="form-control" id="contactPerson" name="contactPerson[]" placeholder="Contact Person" required>';

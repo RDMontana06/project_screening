@@ -24,6 +24,7 @@
 	<!-- End plugin css for this page -->
 	<!-- inject:css -->
 	<link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
+
 	<!-- endinject -->
 	<link rel="shortcut icon" href="{{ asset('images/PMS-LOGO-Mini.svg') }}" />
 	<style>
@@ -31,10 +32,22 @@
 		#inputCompany {
 			display: none;
 		}
+		.loader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url("{{ asset('/images/infinity.gif') }}") 50% 50% no-repeat rgb(249, 249, 249);
+            opacity: .8;
+            background-size: 130px 130px;
+        }
 	</style>
 </head>
 
 <body>
+	<div id="myDiv" style="display:none;" class="loader"></div>
 	<div class="container-scroller">
 		@include('layouts.nav')
 		<div class="container-fluid page-body-wrapper">
@@ -42,6 +55,11 @@
 			@yield('content')
 		</div>
 	</div>
+	<script type = "text/javascript">
+		function show() {
+			document.getElementById("myDiv").style.display="block";
+		}
+	</script>
 	<!-- plugins:js -->
 	<script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
 	<!-- endinject -->

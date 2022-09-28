@@ -18,7 +18,7 @@
                     <input type="text" class="form-control" placeholder="Reference Code" aria-label="refcode" aria-describedby="basic-addon1" name="ref_code" id="refCode">
                 </div>
             </div> --}}
-            <form class="forms-sample" method="post" action="newProject" enctype="multipart/form-data">
+            <form class="forms-sample" method="post" action="newProject" enctype="multipart/form-data" onsubmit="show()">
                 {{csrf_field()}}
             <div class="row">
                 <div class="col-md-4">
@@ -76,15 +76,21 @@
                         <button type="button" class="btn btn-dark btn-sm" onclick="addContacts()">Add New Contact</button>
                     </h5>
                     <div id="contactDetails">
-                        <div class="form-group" id="">
-                            <label for="contactNum">Contact Number(s)
-                            </label>
-                            <input type="text" class="form-control form-control-sm" id="contactNum" name="contactNum[]" placeholder="Contact Number" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="contactPerson">Contact Person(s)
-                            </label>
-                            <input type="text" class="form-control form-control-sm" id="contactPerson" name="contactPerson[]" placeholder="Contact Person" required>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group" id="">
+                                    <label for="contactNum">Contact Number(s)
+                                    </label>
+                                    <input type="text" class="form-control form-control-sm" id="contactNum" name="contactNum[]" placeholder="Contact Number" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="contactPerson">Contact Person(s)
+                                    </label>
+                                    <input type="text" class="form-control form-control-sm" id="contactPerson" name="contactPerson[]" placeholder="Contact Person" required>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
