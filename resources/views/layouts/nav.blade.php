@@ -19,23 +19,25 @@
 			</li>
 			<li class="nav-item nav-profile dropdown">
 				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-					<img src="{{ asset('images/faces/face3.jpg') }}" alt="profile" />
-				</a>
-				<div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-					@if (in_array(1, $user->user_roles->pluck('role_id')->toArray()))
-						<a class="dropdown-item" href="{{ url('user') }}">
-							<i class="ti-user text-primary"></i>
-							{{ __('User Management') }}
+					<img
+						src="{{ url('https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png') }}"
+						alt="profile" />
+
+					<div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+						@if (in_array(1, $user->user_roles->pluck('role_id')->toArray()))
+							<a class="dropdown-item" href="{{ url('user') }}">
+								<i class="ti-user text-primary"></i>
+								{{ __('User Management') }}
+							</a>
+						@endif
+						<a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+							<i class="ti-power-off text-primary"></i>
+							{{ __('Logout') }}
 						</a>
-					@endif
-					<a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-						<i class="ti-power-off text-primary"></i>
-						{{ __('Logout') }}
-					</a>
-					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-						@csrf
-					</form>
-				</div>
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+							@csrf
+						</form>
+					</div>
 			</li>
 		</ul>
 	</div>
