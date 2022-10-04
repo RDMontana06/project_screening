@@ -22,16 +22,17 @@ class UserManagementController extends Controller
             'roles' => $roles
         ));
     }
-    public function save(Request $request){
+    public function save(Request $request)
+    {
         // dd($request);
 
-       $this->validate($request, [
+        $this->validate($request, [
             'name' => 'required', 'string', 'max:255',
             'email' => 'unique:users,email|required', 'string', 'email', 'max:255', 'unique:users',
             'password' => 'required', 'string', 'min:6', 'confirmed',
         ]);
 
-       
+
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
@@ -46,12 +47,13 @@ class UserManagementController extends Controller
                 $userRole->save();
             }
         }
-        
+
         Alert::success('Successfully Created')->persistent('Dismiss');
 
         return back();
     }
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         // dd($request);
         $this->validate($request, [
             'name' => 'required',
@@ -73,7 +75,6 @@ class UserManagementController extends Controller
 
         Alert::success('User Updated', 'Successfully Updated')->persistent('Dismiss');;
         return redirect('user');
-
     }
     public function disable($id)
     {
@@ -94,8 +95,8 @@ class UserManagementController extends Controller
         $user =  User::findOrFail($id);
         $user->password = bcrypt($request->password);
         $user->save();
-        
-        Alert::success('Changed', 'Change Successfully')->persistent('Dismiss');;
-        return redirect('user');
+
+        Alert::success('Changed', 'Change Successfully')->persistent('Dismiss');
+        return back();
     }
 }

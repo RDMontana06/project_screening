@@ -34,6 +34,10 @@
 							<i class="ti-power-off text-primary"></i>
 							{{ __('Logout') }}
 						</a>
+						<a class="dropdown-item" href="#" data-toggle="modal" data-target="#change_pass{{ $user->id }}"><i
+								class="ti-user text-primary"></i>
+							{{ __('Reset Password') }}
+						</a>
 						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 							@csrf
 						</form>
@@ -42,3 +46,4 @@
 		</ul>
 	</div>
 </nav>
+@include('user.reset_password')
