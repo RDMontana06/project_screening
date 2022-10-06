@@ -67,13 +67,14 @@
 														<button type="button" class="btn btn-icon btn-secondary btn-sm approveBtn"
 															data-id="{{ $projectDetails->id }}" id="buyOut{{ $projectDetails->id }}" title="Proceed to Buyout"
 															onclick="forBuyOut(this)">
-															<span  class="ti-arrow-up"></span>
+															<span class="ti-arrow-up"></span>
 														</button>
 													@endif
 													<button type="button" data-toggle="modal" data-target="#viewProject{{ $projectDetails->id }}"
 														class="btn btn-icon btn-info btn-sm" title="View Project">
 														<span class="ti-eye"></span>
 													</button>
+													@include('projectScreening.show_project')
 												</td>
 											</tr>
 											{{-- @endif --}}
