@@ -8,7 +8,8 @@
 					<div class="row">
 						<div class="col-12 col-xl-8 mb-4 mb-xl-0">
 							<h3 class="font-weight-bold">Welcome {{ Auth::user()->name }}</h3>
-							<h6 class="font-weight-normal mb-0">All systems are running smoothly! Current Date <span class="text-primary" id="date"></span></h6>
+							<h6 class="font-weight-normal mb-0">All systems are running smoothly! Current Date <span class="text-primary"
+									id="date"></span></h6>
 						</div>
 					</div>
 				</div>
@@ -21,7 +22,7 @@
 							<span data-toggle="modal" data-target="#approvedList" style="cursor:pointer;" title="Approved List">
 								<p class="fs-30 mb-2">{{ $projects->where('status', 'Approved')->count() }}</p>
 							</span>
-							
+
 						</div>
 					</div>
 				</div>
@@ -78,28 +79,27 @@
 				<div class="col-md-7 grid-margin stretch-card">
 					<div class="card">
 						<div class="card-body">
-						<p class="card-title mb-0">Top Projects</p>
+							<p class="card-title mb-0">Top Projects</p>
 							<div class="table-responsive">
 								<table class="table table-striped table-borderless">
-								<thead>
-									<tr>
-									<th>Project</th>
-									<th>Approved Budget</th>
-									<th>Buyout Amount</th>
-									<th>Date Created</th>
-									</tr>  
-								</thead>
+									<thead>
+										<tr>
+											<th>Project</th>
+											<th>Approved Budget</th>
+											<th>Buyout Amount</th>
+											<th>Date Created</th>
+										</tr>
+									</thead>
 									<tbody>
 										@foreach ($buyouts as $buyout)
-										@if($buyout->count() > 0)
-											<tr>
-												<td>{{ $buyout->project->project_name }}</td>
-												<td>{{ number_format($buyout->project->approved_budget, 2) }}</td>
-												<td>{{ number_format($buyout->total_amt, 2) }}</td>
-												<td>{{ Date('F-d-Y', strtotime($buyout->created_at)) }}</td>
-											</tr>
-										@endif
-											
+											@if ($buyout->count() > 0)
+												<tr>
+													<td>{{ $buyout->project->project_name }}</td>
+													<td>{{ number_format($buyout->project->approved_budget, 2) }}</td>
+													<td>{{ number_format($buyout->total_amt, 2) }}</td>
+													<td>{{ Date('F-d-Y', strtotime($buyout->created_at)) }}</td>
+												</tr>
+											@endif
 										@endforeach
 									</tbody>
 								</table>
@@ -110,31 +110,33 @@
 				<div class="col-md-5 grid-margin stretch-card">
 					<div class="card">
 						<div class="card-body">
-						<p class="card-title mb-0">Top Buyout Payments</p>
+							<p class="card-title mb-0">Top Buyout Payments</p>
 							<div class="table-responsive">
 								<table class="table table-striped table-borderless">
-								<thead>
-									<tr>
-									<th>Buyout Company</th>
-									<th>Amount Paid</th>
-									<th>Total Buyout</th>
-									<th>Last Payment Date</th>
-									</tr>  
-								</thead>
-								<tbody>
-									@foreach ($buyouts as $buyout )
+									<thead>
 										<tr>
-											<td>{{ $buyout->company_name }}</td>
-											<td>{{ number_format(($buyout->payments)->sum('amount'), 2)}}</td>
-											<td>{{ number_format($buyout->total_amt, 2)}}</td>
-											<td>
-												@if (($buyout->payments)->first())
-													{{ Date('F-d-Y', strtotime(($buyout->payments)->first()->created_at)) }}
-												@endif
-											</td>
+											<th>Buyout Company</th>
+											<th>Amount Paid</th>
+											<th>Total Buyout</th>
+											<th>Last Payment Date</th>
 										</tr>
-									@endforeach
-								</tbody>
+									</thead>
+									<tbody>
+										@if ($buyouts)
+											@foreach ($buyouts as $buyout)
+												<tr>
+													<td>{{ $buyout->company_name }}</td>
+													<td>{{ number_format($buyout->payments->sum('amount'), 2) }}</td>
+													<td>{{ number_format($buyout->total_amt, 2) }}</td>
+													<td>
+														@if ($buyout->payments->first())
+															{{ Date('F-d-Y', strtotime($buyout->payments->first()->created_at)) }}
+														@endif
+													</td>
+												</tr>
+											@endforeach
+										@endif
+									</tbody>
 								</table>
 							</div>
 						</div>
@@ -157,48 +159,48 @@
 	</div>
 @endsection
 @section('dashboardScript')
-<script>
-	$(document).ready(function() {
-		$('#approved-table').DataTable({
-		pageLength: 5,
-		lengthMenu: [
-			[5, 10, 20],
-			[5, 10, 20]
-		]
+	<script>
+		$(document).ready(function() {
+			$('#approved-table').DataTable({
+				pageLength: 5,
+				lengthMenu: [
+					[5, 10, 20],
+					[5, 10, 20]
+				]
+			});
+			$('#rejected-table').DataTable({
+				pageLength: 5,
+				lengthMenu: [
+					[5, 10, 20],
+					[5, 10, 20]
+				]
+			});
+			$('#pending-table').DataTable({
+				pageLength: 5,
+				lengthMenu: [
+					[5, 10, 20],
+					[5, 10, 20]
+				]
+			});
+			$('#cancelled-table').DataTable({
+				pageLength: 5,
+				lengthMenu: [
+					[5, 10, 20],
+					[5, 10, 20]
+				]
+			});
+			$('#buyout-table').DataTable({
+				pageLength: 5,
+				lengthMenu: [
+					[5, 10, 20],
+					[5, 10, 20]
+				]
+			});
 		});
-		$('#rejected-table').DataTable({
-		pageLength: 5,
-		lengthMenu: [
-			[5, 10, 20],
-			[5, 10, 20]
-		]
-		});
-		$('#pending-table').DataTable({
-		pageLength: 5,
-		lengthMenu: [
-			[5, 10, 20],
-			[5, 10, 20]
-		]
-		});
-		$('#cancelled-table').DataTable({
-		pageLength: 5,
-		lengthMenu: [
-			[5, 10, 20],
-			[5, 10, 20]
-		]
-		});
-		$('#buyout-table').DataTable({
-		pageLength: 5,
-		lengthMenu: [
-			[5, 10, 20],
-			[5, 10, 20]
-		]
-		});
-	});
-	n = new Date();
-	y = n.getFullYear();
-	m = n.getMonth() + 1;
-	d = n.getDate();
-	document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
-</script>
+		n = new Date();
+		y = n.getFullYear();
+		m = n.getMonth() + 1;
+		d = n.getDate();
+		document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+	</script>
 @endsection
