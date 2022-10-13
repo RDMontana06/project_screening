@@ -122,8 +122,8 @@
 										</tr>
 									</thead>
 									<tbody>
-										@if ($buyouts)
-											@foreach ($buyouts as $buyout)
+										@foreach ($buyouts as $buyout)
+											@if ($buyout->count() > 0)
 												<tr>
 													<td>{{ $buyout->company_name }}</td>
 													<td>{{ number_format($buyout->payments->sum('amount'), 2) }}</td>
@@ -134,8 +134,8 @@
 														@endif
 													</td>
 												</tr>
-											@endforeach
-										@endif
+											@endif
+										@endforeach
 									</tbody>
 								</table>
 							</div>
