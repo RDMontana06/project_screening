@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -23,6 +24,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('get-projects', 'ProjectController@projScrenningShow');
     Route::post('newProject', 'ProjectController@projScrenningSave');
     Route::post('cancelProjet/{id}', 'ProjectController@cancelProject');
+    Route::post('updateProject/{id}', 'ProjectController@updateProject');
+
 
     Route::get('projectApproval', 'ProjectController@projectIndex')->name('projectApproval');
     Route::post('rejectProjet/{id}', 'ProjectController@rejectProject');
@@ -34,7 +37,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('buyout/view/{id}', 'BuyoutController@view')->name('buyout_view');
     Route::get('saveBuyoutDetails/{id}', 'BuyoutController@view');
     Route::post('updateBuyoutCompany', 'BuyoutController@updateBuyout');
-    Route::post('buyout/view/savePayment/{proj_id}/{bo_id}', 'BuyoutController@savePayment');
+    Route::post('savePayment/{proj_id}/{bo_id}', 'BuyoutController@savePayment');
+    Route::get('buyoutPayment', 'BuyoutController@buyoutPayment')->name('buyout_payment');
+    Route::post('updatePaymentAmt/{idx}', 'BuyoutController@updatePayment');
 
     Route::get('user', 'UserManagementController@index');
     Route::post('saveUser', 'UserManagementController@save')->name('saveUser');

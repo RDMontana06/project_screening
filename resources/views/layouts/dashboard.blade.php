@@ -76,7 +76,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-7 grid-margin stretch-card">
+				<div class="col-md-6 grid-margin stretch-card">
 					<div class="card">
 						<div class="card-body">
 							<p class="card-title mb-0">Top Projects</p>
@@ -94,7 +94,7 @@
 										@foreach ($buyouts as $buyout)
 											@if ($buyout->count() > 0)
 												<tr>
-													<td>{{ $buyout->project->project_name }}</td>
+													<td class="text-wrap">{{ $buyout->project->project_name }}</td>
 													<td>{{ number_format($buyout->project->approved_budget, 2) }}</td>
 													<td>{{ number_format($buyout->total_amt, 2) }}</td>
 													<td>{{ Date('F-d-Y', strtotime($buyout->created_at)) }}</td>
@@ -107,7 +107,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-5 grid-margin stretch-card">
+				<div class="col-md-6 grid-margin stretch-card">
 					<div class="card">
 						<div class="card-body">
 							<p class="card-title mb-0">Top Buyout Payments</p>
@@ -118,6 +118,7 @@
 											<th>Buyout Company</th>
 											<th>Amount Paid</th>
 											<th>Total Buyout</th>
+											<th>Balance</th>
 											<th>Last Payment Date</th>
 										</tr>
 									</thead>
@@ -128,6 +129,7 @@
 													<td>{{ $buyout->company_name }}</td>
 													<td>{{ number_format($buyout->payments->sum('amount'), 2) }}</td>
 													<td>{{ number_format($buyout->total_amt, 2) }}</td>
+													<td>{{ number_format($buyout->balance, 2) }}</td>
 													<td>
 														@if ($buyout->payments->first())
 															{{ Date('F-d-Y', strtotime($buyout->payments->first()->created_at)) }}

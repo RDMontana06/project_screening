@@ -6,7 +6,7 @@ use App\Attachment;
 use App\Project;
 use App\Contact;
 use App\User;
-use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -21,7 +21,7 @@ class ProjectController extends Controller
         // dd($request);
         $projects = Project::with('attachment', 'contact')->get();
         $user = User::with('user_roles.roles')->where('id', auth()->user()->id)->first();
-        return view($request->path().'.index', ['projects' => $projects, 'user' => $user]);
+        return view($request->path() . '.index', ['projects' => $projects, 'user' => $user]);
     }
     public function projScrenningSave(Request $request)
     {
@@ -131,7 +131,8 @@ class ProjectController extends Controller
         Alert::success('Buyout', 'Successfully updated');
         return back();
     }
-    public function saveBuyoutType(Request $request){
+    public function saveBuyoutType(Request $request)
+    {
         // dd($request);
 
         $this->validate($request, [
@@ -145,8 +146,77 @@ class ProjectController extends Controller
         );
         Alert::success('Buyout type', 'Successfully Updated')->persistent('Dismiss');
         return back();
+    }
+    public function updateProject(Request $request, $id)
+    {
+        // dd($request);
+        // $this->validate($request, [
+        //     'project_name' => 'unique:projects|required',
+        //     'project_type' => 'required',
+        //     'location' => 'required',
+        //     'contactNum' => 'required|unique:contacts',
+        //     'contactPerson' => 'required|unique:contacts',
+        //     'address' => 'required',
+        //     'type' =>  'required',
+        //     'approved_budget' => 'required',
+        //     'remarks' => 'required',
+        //     'file' => 'required',
+        // ]);
+
+        $project =  Project::findOrFail($id);
+        $project->project_name = $request->project_name;
+        $project->project_type = $request->project_type;
+        $project->location = $request->location;
+        $project->company_name = $request->company_name;
+        $project->address = $request->address;
+        $project->type = $request->type;
+        $project->approved_budget = $request->approved_budget;
+        $project->remarks = $request->remarks;
+        $project->prepared_by = auth()->user()->id;
+        $project->status = 'Pending';
+        $project->update();
+
+        // dd($request->all());
+        foreach ($request->editContactNumOld  as $key => $contactNum) {
+            // dd($contactNum);
+            $contacts =  Contact::findOrFail($key);
+            $contacts->contact_number = $contactNum;
+            $contacts->update();;
+        }
+        foreach ($request->editContactPersonOld  as $key => $contactName) {
+            // dd($contactNum);
+            $contacts =  Contact::findOrFail($key);
+            $contacts->contact_name = $contactName;
+            $contacts->update();;
+        }
+
+        $attachements = Attachment::where('project_id', $id)->whereNotIn('id', $request->filesAttach)->get();
+        foreach ($attachements as $attach) {
+            $attach->status = 0;
+            $attach->update();
+        }
 
 
+        //Save Multiple File
+        if ($request->hasFile('file')) {
+            foreach ($request->file('file') as $file) {
+                $path = $file->getClientOriginalName();
+                $name = time() . '-' . $path;
+                //$file->move(public_path().'/project-images/', $name);
+
+
+                $attachment = new Attachment();
+                //$attachment->attachment = $file->storeAs('storage/app/public/project-files', $name);
+                $file->move(public_path() . '/project-files/', $name);
+                $file_name = '/project-files/' . $name;
+                $attachment->attachment = $file_name;
+                $attachment->project_id = $project->id;
+                $attachment->status = 1;
+                $attachment->save();
+            }
+        }
+        Alert::success('Project Updated', 'Successfully Updated')->persistent('Dismiss');
+        return back();
     }
     /**
      * Show the form for creating a new resource.

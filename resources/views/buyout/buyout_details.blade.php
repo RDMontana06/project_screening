@@ -34,7 +34,8 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="amount">Buyout Total Amount <small>(Required)</small></label>
-								<input type="number" class="form-control" id="total_amt" name="total_amt" placeholder="0.00" required>
+								<input type="number" class="form-control" step="0.01" min="0.01" id="total_amt" name="total_amt"
+									placeholder="0.00">
 							</div>
 							<div class="form-group">
 								<label>Buyout Attachments</label>
@@ -42,8 +43,6 @@
 							</div>
 						</div>
 					</div>
-
-
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>

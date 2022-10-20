@@ -15,7 +15,8 @@
 			<div class="card">
 				<div class="card-header bg-white text-dark mb-3 ">
 					<h4 class="font-weight-bold d-flex justify-content-start align-items-center"> Projects
-						<button type="button" class="btn btn-outline-info btn-icon-text btn-rounded btn-sm ml-2" data-toggle="modal" data-target="#buyoutHistory">
+						<button type="button" class="btn btn-outline-info btn-icon-text btn-rounded btn-sm ml-2" data-toggle="modal"
+							data-target="#buyoutHistory">
 							<span class="ti-new-window btn-icon-prepend"></span>Buyout History
 						</button>
 					</h4>
@@ -39,7 +40,7 @@
 								@foreach ($projects as $projectDetails)
 									{{-- @if ($projectDetails->status == 'Pending') --}}
 									<tr id='project{{ $projectDetails->id }}'>
-										<td>{{ $projectDetails->project_name }}</td>
+										<td class="text-wrap">{{ $projectDetails->project_name }}</td>
 										<td>{{ $projectDetails->project_type }}</td>
 										<td>{{ $projectDetails->type }}</td>
 										<td>{{ $projectDetails->location }}</td>
@@ -57,6 +58,9 @@
 											@elseif ($projectDetails->status == 'Buyout')
 												<label id="approvalStatus{{ $projectDetails->id }}"
 													class="badge badge-primary">{{ $projectDetails->status }}</label>
+											@elseif ($projectDetails->status == 'For Payment')
+												<label id="approvalStatus{{ $projectDetails->id }}"
+													class="badge badge-warning">{{ $projectDetails->status }}</label>
 											@else
 												<label id="approvalStatus{{ $projectDetails->id }}"
 													class="badge badge-warning">{{ $projectDetails->status }}</label>
@@ -64,19 +68,13 @@
 
 										</td>
 										<td style="width:10%;" class="">
-											@if(count($projectDetails->bo_companies) != 0)
-											<a href="{{ route('buyout_view',[$projectDetails->id])}}" >
-												<button type="button" class="btn btn-outline-info btn-rounded btn-icon buyoutSelect" title="Buyout Payment">
-													<span class="ti-money"></span>
-												</button>
-											</a>
-											@endif
-											@if(count($projectDetails->bo_companies) == 0)
-												<button type="button" data-toggle="modal" data-id="{{ $projectDetails->id }}" class="btn btn-outline-warning btn-rounded btn-icon buyoutDetails" title="Create Buyout">
+											@if (count($projectDetails->bo_companies) == 0)
+												<button type="button" data-toggle="modal" data-id="{{ $projectDetails->id }}"
+													class="btn btn-outline-warning btn-rounded btn-icon buyoutDetails" title="Create Buyout">
 													<span class="ti-pencil-alt"></span>
 												</button>
 											@endif
-											
+
 										</td>
 									</tr>
 									{{-- @endif --}}
@@ -90,36 +88,35 @@
 		@include('buyout.buyout_details')
 		@include('buyout.buyout_hist')
 		@include('layouts.footer')
-</div>
+	</div>
 @endsection
 @section('buyoutScripts')
 	<script>
-	$(document).ready(function() {
-	  $('#buyout-tbl').DataTable({
-	   pageLength: 5,
-	   lengthMenu: [
-	    [5, 10, 20],
-	    [5, 10, 20]
-	   ]
-	  });
-	});
-	$(document).ready(function() {
-	  $('#buyoutHist-tbl').DataTable({
-	   pageLength: 5,
-	   lengthMenu: [
-	    [5, 10, 20],
-	    [5, 10, 20]
-	   ]
-	  });
-	});
-	 $(document).ready(function() {
-		$(document).on("click", ".buyoutDetails", function () {
-			console.log('Tetetstet');
-			var id = $(this).data('id');
-			$('#buyoutDetails').find('.modal-body #hiddenId').val(id);
-			$('#buyoutDetails').modal('show');
+		$(document).ready(function() {
+			$('#buyout-tbl').DataTable({
+				pageLength: 5,
+				lengthMenu: [
+					[5, 10, 20],
+					[5, 10, 20]
+				]
+			});
 		});
-	 });
-	 
+		$(document).ready(function() {
+			$('#buyoutHist-tbl').DataTable({
+				pageLength: 5,
+				lengthMenu: [
+					[5, 10, 20],
+					[5, 10, 20]
+				]
+			});
+		});
+		$(document).ready(function() {
+			$(document).on("click", ".buyoutDetails", function() {
+				console.log('Tetetstet');
+				var id = $(this).data('id');
+				$('#buyoutDetails').find('.modal-body #hiddenId').val(id);
+				$('#buyoutDetails').modal('show');
+			});
+		});
 	</script>
 @endsection

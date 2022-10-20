@@ -16,7 +16,7 @@ class BuyoutController extends Controller
     public function index()
     {
         $user = User::with('user_roles.roles')->where('id', auth()->user()->id)->first();
-        $projects = Project::with('attachment', 'contact', 'bo_companies')->where('status', 'Buyout')->get();
+        $projects = Project::with('attachment', 'contact', 'bo_companies')->whereIn('status', ['Buyout', 'For Payment'])->orderBy('id', 'desc')->get();
         return view('buyout.index', ['projects' => $projects, 'user' => $user]);
     }
     public function view(Request $request, $id)
@@ -34,7 +34,7 @@ class BuyoutController extends Controller
             'company_name' => 'required',
             'contact_person' => 'required',
             'contact_number' => 'required',
-            'total_amt' => 'required',
+            // 'total_amt' => 'required',
             // 'attachment' => 'required|mimes:jpeg,jpg,bmp,png,pdf',
         ]);
 
@@ -44,7 +44,7 @@ class BuyoutController extends Controller
         $company->contact_person = $request->contact_person;
         $company->contact_number = $request->contact_number;
         $company->total_amt = $request->total_amt;
-        $company->balance = $request->total_amt;
+        $company->balance = 0.00;
 
         // Save Attachment
         if ($request->file('attachment')) {
@@ -56,34 +56,47 @@ class BuyoutController extends Controller
             $company->attachment = $file_name;
         }
         $company->save();
+
+        Project::Where('id', $company->project_id)->update(
+            [
+                'status' => 'For Payment'
+            ]
+        );
         Alert::success('Buyout Details', 'Successfully Updated')->persistent('Dismiss');
         return back();
     }
     public function savePayment(Request $request, $p_id, $b_id)
     {
-        //  dd($request);
+        // dd($request);
         $this->validate($request, [
             'amount' => 'required',
             'attachment' => 'required',
+            // 'total_amt' => 'required',
         ]);
 
         $bo = BoCompany::findOrFail($b_id);
 
         $payments = Payment::where('bo_company_id', $b_id)->sum('amount');
         $status = "";
-        // dd($payments);
-        if ($request->amount > $bo->total_amt) {
+
+        if ($request->amount > $request->total_amt) {
             Alert::error('Amount is greater than total amount!')->persistent('Dismiss');
             return back();
         }
+
+        $bo->total_amt = $request->total_amt;
+        $bo->balance = $request->total_amt - $request->amount;
         if ($bo->balance == 0) {
             $status = 'Fully Paid';
+            // Update project Status
+            $pr = Project::findOrFail($p_id);
+            $pr->status = 'Buyout Fully Paid';
+            $pr->update();
         } else {
             $status = 'Paid';
         }
-        $bo->balance = $bo->balance - $request->amount;
         $bo->status = $status;
-        $bo->save();
+        $bo->update();
 
         $payment = new Payment;
         $payment->project_id = $p_id;
@@ -108,9 +121,51 @@ class BuyoutController extends Controller
             }
         }
 
-
-
         Alert::success('Payment Success')->persistent('Dismiss');
+        return back();
+    }
+    public function buyoutPayment()
+    {
+        $buyoutPayment = Project::with('attachment', 'contact', 'bo_companies.payments')->whereIn('status', ['Buyout Fully Paid', 'For Payment'])->orderBy('id', 'desc')->get();
+        // dd($buyoutPayment);
+        $user = User::with('user_roles.roles')->where('id', auth()->user()->id)->first();
+        return view('buyoutPayment.index', ['buyoutPayment' => $buyoutPayment, 'user' => $user]);
+    }
+    public function updatePayment(Request $request, $idx)
+    {
+        $this->validate($request, [
+            'amount_edit' => 'required',
+        ]);
+        // dd($request, $idx);
+        $boComp = BoCompany::findOrFail($idx);
+        // dd($boComp);
+        $boPay = Payment::where('bo_company_id', $idx)->first();
+        // dd($boPay);
+
+
+
+        if ($request->amount_edit > $boComp->total_amt) {
+            Alert::warning('Invalid Amount', 'Amount cannot be greater than Total Amount')->persistent('Dismiss');
+            return back();
+        }
+        //Update Amount
+        $boPay->amount = $request->amount_edit;
+        $boPay->save();
+
+        //Upadte Balance
+
+        $boComp->balance = $boComp->total_amt - $boPay->amount;
+        // dd($boComp->balance);
+        if ($boComp->balance == 0) {
+            $boComp->status = "Fully Paid";
+            $boComp->balance = $boComp->balance;
+            $boComp->save();
+        }
+
+
+
+
+        Alert::success('Payment amount was updated')->persistent('Dismiss');
         return back();
     }
 }

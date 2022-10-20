@@ -28,7 +28,7 @@
 										@foreach ($projects as $projectDetails)
 											{{-- @if ($projectDetails->status == 'Pending') --}}
 											<tr id='project{{ $projectDetails->id }}'>
-												<td>{{ $projectDetails->project_name }}</td>
+												<td class="text-wrap">{{ $projectDetails->project_name }}</td>
 												<td>{{ $projectDetails->project_type }}</td>
 												<td>{{ $projectDetails->type }}</td>
 												<td>{{ $projectDetails->location }}</td>
@@ -46,9 +46,18 @@
 													@elseif ($projectDetails->status == 'Buyout')
 														<label id="approvalStatus{{ $projectDetails->id }}"
 															class="badge badge-primary">{{ $projectDetails->status }}</label>
-													@else
+													@elseif ($projectDetails->status == 'For Payment')
+														<label id="approvalStatus{{ $projectDetails->id }}"
+															class="badge badge-dark">{{ $projectDetails->status }}</label>
+													@elseif ($projectDetails->status == 'Buyout Fully Paid')
+														<label id="approvalStatus{{ $projectDetails->id }}"
+															class="badge badge-outline-success">{{ $projectDetails->status }}</label>
+													@elseif ($projectDetails->status == 'Rejected')
 														<label id="approvalStatus{{ $projectDetails->id }}"
 															class="badge badge-danger">{{ $projectDetails->status }}</label>
+													@else
+														<label id="approvalStatus{{ $projectDetails->id }}"
+															class="badge badge-light">{{ $projectDetails->status }}</label>
 													@endif
 
 												</td>
@@ -59,11 +68,11 @@
 															onclick="rejectProj(this)">
 															<span class="ti-close"></span>
 														</button>
-														<button type="button" class="btn btn-icon btn-success btn-sm approveBtn"
+														{{-- <button type="button" class="btn btn-icon btn-success btn-sm approveBtn"
 															data-id="{{ $projectDetails->id }}" data-toggle="modal" id="approved{{ $projectDetails->id }}"
 															data-target="#approvalModal" title="Approve" onclick="getRow(this)">
 															<span class="ti-check"></span>
-														</button>
+														</button> --}}
 														<button type="button" class="btn btn-icon btn-secondary btn-sm approveBtn"
 															data-id="{{ $projectDetails->id }}" id="buyOut{{ $projectDetails->id }}" title="Proceed to Buyout"
 															onclick="forBuyOut(this)">

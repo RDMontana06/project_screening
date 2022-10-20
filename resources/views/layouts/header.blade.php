@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
 
 	<link rel="stylesheet" href="{{ asset('vendors/select2/select2.min.css') }}">
-  	<link rel="stylesheet" href="{{ asset('vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
 	<!-- endinject -->
 	<!-- Plugin css for this page -->
 	<link rel="stylesheet" href="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
@@ -21,6 +21,8 @@
 	<link rel="stylesheet" href="{{ asset('vendors/sweetalert2/sweetalert2.css') }}" />
 
 	<link rel="stylesheet" type="text/css" href="{{ asset('js/select.dataTables.min.css') }}">
+	<link href="{{ asset('vendors/fontawesome6/css/all.min.css') }} " rel="stylesheet">
+
 	<!-- End plugin css for this page -->
 	<!-- inject:css -->
 	<link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
@@ -32,17 +34,18 @@
 		#inputCompany {
 			display: none;
 		}
+
 		.loader {
-            position: fixed;
-            left: 0px;
-            top: 0px;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            background: url("{{ asset('/images/infinity.gif') }}") 50% 50% no-repeat rgb(249, 249, 249);
-            opacity: .8;
-            background-size: 130px 130px;
-        }
+			position: fixed;
+			left: 0px;
+			top: 0px;
+			width: 100%;
+			height: 100%;
+			z-index: 9999;
+			background: url("{{ asset('/images/infinity.gif') }}") 50% 50% no-repeat rgb(249, 249, 249);
+			opacity: .8;
+			background-size: 130px 130px;
+		}
 	</style>
 </head>
 
@@ -55,9 +58,9 @@
 			@yield('content')
 		</div>
 	</div>
-	<script type = "text/javascript">
+	<script type="text/javascript">
 		function show() {
-			document.getElementById("myDiv").style.display="block";
+			document.getElementById("myDiv").style.display = "block";
 		}
 	</script>
 	<!-- plugins:js -->
@@ -82,12 +85,12 @@
 
 	<script src="{{ asset('js/file-upload.js') }}"></script>
 	<script src="{{ asset('js/select2.js') }}"></script>
-	
+
 	<script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
 	<script src="{{ asset('vendors/datatables.net/jquery.dataTables.js') }}"></script>
 	<script src="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
 	<script src="{{ asset('js/dataTables.select.min.js') }}"></script>
-	
+
 	<script src="{{ asset('vendors/sweetalert2/sweetalert2.min.js') }}" type="text/javascript"></script>
 	@include('sweetalert::alert')
 

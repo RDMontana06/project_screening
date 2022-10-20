@@ -15,7 +15,7 @@
 		</ul>
 		<ul class="navbar-nav navbar-nav-right">
 			<li class="nav-item nav-profile dropdown">
-				{{-- <b> {{ auth()->user()->name }} </b> --}}
+				<b> {{ auth()->user()->name }} </b>
 			</li>
 			<li class="nav-item nav-profile dropdown">
 				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">

@@ -50,6 +50,7 @@
 
 	<script src="{{ asset('vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
 	<script src="{{ asset('vendors/select2/select2.min.js') }}"></script>
+	<script src="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}"></script>
 
 	<script src="{{ asset('js/file-upload.js') }}"></script>
 	<script src="{{ asset('js/typeahead.js') }}"></script>
@@ -69,7 +70,7 @@
 	<script src="{{ asset('vendors/datatables.net/jquery.dataTables.js') }}"></script>
 	<script src="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
 	<script src="{{ asset('js/dataTables.select.min.js') }}"></script>
-	
+
 	<script src="{{ asset('vendors/sweetalert2/sweetalert2.min.js') }}" type="text/javascript"></script>
 	@include('sweetalert::alert')
 
