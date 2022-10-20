@@ -10,7 +10,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="updateBuyoutCompany" method="post">
+				<form action="updateBuyoutCompany" method="post" onsubmit="show()">
 					{{ csrf_field() }}
 					<input type="text" name="project_id" id="hiddenId" value="" hidden>
 					<div class="row">
@@ -43,6 +43,8 @@
 							</div>
 						</div>
 					</div>
+
+
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>

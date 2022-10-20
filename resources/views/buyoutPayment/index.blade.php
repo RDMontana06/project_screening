@@ -81,7 +81,7 @@
 											@endif
 										</td>
 										<td style="width:10%;" class="">
-											@if ($buyoutPayments->bo_companies[0]->balance = 0 || $buyoutPayments->bo_companies[0]->balance == null)
+											@if ($buyoutPayments->bo_companies[0]->total_amt == 0)
 												<button data-target="#buyoutSelect{{ $buyoutPayments->bo_companies[0]->id }}" data-toggle="modal"
 													type="button" class="btn btn-outline-success btn-rounded btn-icon " title="Proceed to Payment">
 													<span class="fa-solid fa-money-bill"></span>
@@ -98,7 +98,6 @@
 
 
 											@include('buyoutPayment.details')
-
 											<button data-target="#details{{ $buyoutPayments->bo_companies[0]->id }}" data-toggle="modal"
 												class="btn btn-outline-primary btn-rounded btn-icon" title="Details">
 												<span class="fa-light fa-file-lines"></span>
