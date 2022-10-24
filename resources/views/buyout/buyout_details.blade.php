@@ -33,7 +33,7 @@
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="amount">Buyout Total Amount <small>(Required)</small></label>
+								<label for="amount">Buyout Total Amount <small></small></label>
 								<input type="number" class="form-control" step="0.01" min="0.01" id="total_amt" name="total_amt"
 									placeholder="0.00">
 							</div>

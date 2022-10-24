@@ -118,7 +118,7 @@
 											<th>Buyout Company</th>
 											<th>Amount Paid</th>
 											<th>Total Buyout</th>
-											<th>Balance</th>
+											{{-- <th>Balance</th> --}}
 											<th>Last Payment Date</th>
 										</tr>
 									</thead>
@@ -129,7 +129,7 @@
 													<td>{{ $buyout->company_name }}</td>
 													<td>{{ number_format($buyout->payments->sum('amount'), 2) }}</td>
 													<td>{{ number_format($buyout->total_amt, 2) }}</td>
-													<td>{{ number_format($buyout->balance, 2) }}</td>
+													{{-- <td>{{ number_format($buyout->balance, 2) }}</td> --}}
 													<td>
 														@if ($buyout->payments->first())
 															{{ Date('F-d-Y', strtotime($buyout->payments->first()->created_at)) }}

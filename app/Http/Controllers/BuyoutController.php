@@ -88,6 +88,10 @@ class BuyoutController extends Controller
             Alert::error('Amount is greater than total amount!')->persistent('Dismiss');
             return back();
         }
+        if ($request->amount < $request->total_amt) {
+            Alert::error('Amount cannot be less than total amount!')->persistent('Dismiss');
+            return back();
+        }
 
         $bo->total_amt = $request->total_amt;
         $bo->balance = $bo->total_amt - $request->amount;
