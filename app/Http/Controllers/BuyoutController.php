@@ -83,7 +83,7 @@ class BuyoutController extends Controller
 
         $varTotAmt = $request->total_amt;
         $varTotAmt = floatval($varTotAmt);
-
+        // dd($request->total_amt);
         if ($request->amount > $request->total_amt) {
             Alert::error('Amount is greater than total amount!')->persistent('Dismiss');
             return back();

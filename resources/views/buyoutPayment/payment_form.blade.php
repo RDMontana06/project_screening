@@ -18,9 +18,8 @@
 					<div class="form-group">
 						<label>Total Amount</label>
 						@if ($buyoutPayments->bo_companies[0]->total_amt > 0)
-							<input type="text" class="form-control"
-								value="{{ number_format($buyoutPayments->bo_companies[0]->total_amt, 2) }}" id="total_amt" name="total_amt"
-								required readonly="true">
+							<input type="text" class="form-control" value="{{ $buyoutPayments->bo_companies[0]->total_amt }}"
+								id="total_amt" name="total_amt" required readonly="true">
 							<input type="text" hidden value="{{ $buyoutPayments->bo_companies[0]->total_amt }}" name="tot_amt">
 						@else
 							<input type="number" class="form-control" value="" id="totalAmt" name="total_amt" required>
@@ -30,8 +29,7 @@
 					<div class="form-group">
 						<label>Total Paid</label>
 						<input type="text" class="form-control" disabled="true"
-							value="{{ number_format($buyoutPayments->bo_companies[0]->payments->sum('amount'), 2) }}" id="total_paid"
-							name="total_amt_paid">
+							value="{{ $buyoutPayments->bo_companies[0]->payments->sum('amount') }}" id="total_paid" name="total_amt_paid">
 					</div>
 					<div class="form-group">
 						<label for="amount">Amount <small>(Required)</small></label>
