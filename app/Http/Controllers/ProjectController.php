@@ -191,9 +191,9 @@ class ProjectController extends Controller
         }
         //dd($request->file);
         $attachements = Attachment::where('project_id', $id)->whereNotIn('id', $request->filesAttach)->get();
-        dd($attachements);
+        // dd($attachements);
         foreach ($attachements as $attach) {
-            dd('----------------');
+            // dd('----------------');
             $attach->status = 0;
             $attach->update();
         }
