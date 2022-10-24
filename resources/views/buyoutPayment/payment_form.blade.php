@@ -35,9 +35,8 @@
 					</div>
 					<div class="form-group">
 						<label for="amount">Amount <small>(Required)</small></label>
-						<input type="number" class="form-control" id="amt" name="amount" placeholder="0.00"
-							min="{{ $buyoutPayments->bo_companies[0]->total_amt }}" max="{{ $buyoutPayments->bo_companies[0]->total_amt }}"
-							required value="{{ old('amount') }}" step=".01">
+						<input type="number" class="form-control" id="amt" name="amount" placeholder="0.00" required
+							value="{{ old('amount') }}" step=".01">
 					</div>
 					<div class="form-group">
 						<label>Attachments</label>
