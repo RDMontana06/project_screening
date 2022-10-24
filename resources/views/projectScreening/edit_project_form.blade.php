@@ -127,6 +127,7 @@
 										@if ($attachments->status == 1)
 											<div id="fileIdx{{ $attachments->id }}">
 												<span>{{ $attachments->attachment }} </span>
+												{{-- <input type="text" name="oldFiles[]]" id="" value={{ attachments->id }}> --}}
 												<span>
 													<button type="button" class="btn btn-danger btn-sm"
 														onclick="removeFile({{ $attachments->id }})">x</button>

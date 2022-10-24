@@ -98,7 +98,8 @@
 				lengthMenu: [
 					[5, 10, 20],
 					[5, 10, 20]
-				]
+				],
+				// ordering: false,
 			});
 		});
 		$(document).ready(function() {

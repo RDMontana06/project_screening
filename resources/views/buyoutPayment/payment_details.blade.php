@@ -22,7 +22,7 @@
 							<tr>
 								<td>{{ date('M-d-Y l', strtotime($bo_payment->created_at)) }}</td>
 								<td width="20%" class="text-right">{{ number_format($bo_payment->amount, 2) }}</td>
-								<td><label class="badge badge-primary"> {{ $bo_payment->status }}</label></td>
+								<td><label class="badge badge-success"> {{ $bo_payment->status }}</label></td>
 								<td>
 									@if ($buyoutPayments->bo_companies[0]->payments->sum('amount') != $buyoutPayments->bo_companies[0]->total_amt &&
 									    $bo_payment->status != 'Fully Paid')

@@ -162,7 +162,8 @@
 				lengthMenu: [
 					[5, 10, 20],
 					[5, 10, 20]
-				]
+				],
+				ordering: false,
 			});
 		});
 		//  Add New Contact

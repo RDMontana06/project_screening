@@ -189,14 +189,20 @@ class ProjectController extends Controller
             $contacts->contact_name = $contactName;
             $contacts->update();;
         }
-        //dd($request->file);
-        $attachements = Attachment::where('project_id', $id)->whereNotIn('id', $request->filesAttach)->get();
-        // dd($attachements);
+        // dd($request);
+        if ($request->filesAttach) {
+            //  dd($attachements);
+            $attachements = Attachment::where('project_id', $id)->whereNotIn('id', $request->filesAttach)->get();
+        } else {
+            $attachements = Attachment::where('project_id', $id)->get();
+        }
+
         foreach ($attachements as $attach) {
             // dd('----------------');
             $attach->status = 0;
             $attach->update();
         }
+
 
 
         //Save Multiple File

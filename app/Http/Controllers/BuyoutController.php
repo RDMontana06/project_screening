@@ -78,17 +78,19 @@ class BuyoutController extends Controller
         // dd($request->amount, $request->total_amt);
         $bo = BoCompany::findOrFail($b_id);
         $status = "";
-        if ($request->amount > $request->tot_amt) {
+        $varAmt = $request->amount;
+        $varAmt = floatval($varAmt);
+
+        $varTotAmt = $request->total_amt;
+        $varTotAmt = floatval($varTotAmt);
+
+        if ($request->amount > $request->total_amt) {
             Alert::error('Amount is greater than total amount!')->persistent('Dismiss');
             return back();
         }
 
-
-        $payTotal = Payment::where('bo_company_id', $b_id)->sum('amount');
-        // dd($payTotal);
-
-        $bo->total_amt = $request->tot_amt;
-        $bo->balance = $bo->total_amt - $payTotal;
+        $bo->total_amt = $request->total_amt;
+        $bo->balance = $bo->total_amt - $request->amount;
         // dd($bo->balance);
         if ($bo->balance == 0) {
             $status = 'Fully Paid';
@@ -148,17 +150,17 @@ class BuyoutController extends Controller
         // dd($boPay);
 
 
-
         if ($request->amount_edit > $boComp->total_amt) {
             Alert::warning('Invalid Amount', 'Amount cannot be greater than Total Amount')->persistent('Dismiss');
             return back();
         }
         //Update Amount
         $boPay->amount = $request->amount_edit;
-        $boPay->save();
-        // dd($boPay);
-        //Update Balance
         $boComp->balance = $boComp->total_amt - $boPay->amount;
+        if ($boComp->balance == 0) {
+            $boPay->status = "Fully Paid";
+        }
+        $boPay->save();
         // dd($boComp->balance);
         if ($boComp->balance == 0) {
             $boComp->status = "Fully Paid";
