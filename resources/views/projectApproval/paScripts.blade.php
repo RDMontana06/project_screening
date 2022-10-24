@@ -129,10 +129,12 @@
 								// document.querySelector('#project' + idx).remove();
 
 								// Remove Elements
+								console.log("IDIDIDID: " + idx);
 								document.querySelector('#approvalStatus' + idx).remove();
-								document.querySelector('#approved' + idx).remove();
-								document.querySelector('#reject' + idx).remove();
-								document.querySelector('#buyOut' + idx).remove();
+								// document.querySelector('#approved' + idx).remove();
+								document.getElementById('reject' + idx).remove();
+								document.getElementById('buyOut' + idx).remove();
+								// document.querySelecxtor('#buyOut' + idx).remove();
 
 
 							});

@@ -24,7 +24,8 @@
 								<td width="20%" class="text-right">{{ number_format($bo_payment->amount, 2) }}</td>
 								<td><label class="badge badge-primary"> {{ $bo_payment->status }}</label></td>
 								<td>
-									@if ($bo_payment->status != 'Fully Paid')
+									@if ($buyoutPayments->bo_companies[0]->payments->sum('amount') != $buyoutPayments->bo_companies[0]->total_amt &&
+									    $bo_payment->status != 'Fully Paid')
 										<button class="btn btn-icon btn-outline-info btn-sm" data-toggle="modal"
 											data-target="#editPayment{{ $bo_payment->bo_company_id }}" title="Edit Payment Amount"><span
 												class="fa-solid fa-pen-to-square"></span></button>

@@ -8,7 +8,7 @@ use App\BoCompany;
 use App\Payment;
 use App\User;
 use App\PaymentAttachment;
-use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 use Validator;
 
 class BuyoutController extends Controller
@@ -67,25 +67,29 @@ class BuyoutController extends Controller
     }
     public function savePayment(Request $request, $p_id, $b_id)
     {
-        // dd($request);
+
         $this->validate($request, [
             'amount' => 'required',
             'attachment' => 'required',
             // 'total_amt' => 'required',
         ]);
-
+        // dd($request->all());
+        // $request->amount =  number_format($request->amount, 2);
+        // dd($request->amount, $request->total_amt);
         $bo = BoCompany::findOrFail($b_id);
-
-        $payments = Payment::where('bo_company_id', $b_id)->sum('amount');
         $status = "";
-
-        if ($request->amount > $request->total_amt) {
+        if ($request->amount > $request->tot_amt) {
             Alert::error('Amount is greater than total amount!')->persistent('Dismiss');
             return back();
         }
 
-        $bo->total_amt = $request->total_amt;
-        $bo->balance = $request->total_amt - $request->amount;
+
+        $payTotal = Payment::where('bo_company_id', $b_id)->sum('amount');
+        // dd($payTotal);
+
+        $bo->total_amt = $request->tot_amt;
+        $bo->balance = $bo->total_amt - $payTotal;
+        // dd($bo->balance);
         if ($bo->balance == 0) {
             $status = 'Fully Paid';
             // Update project Status
@@ -93,7 +97,7 @@ class BuyoutController extends Controller
             $pr->status = 'Buyout Fully Paid';
             $pr->update();
         } else {
-            $status = 'Paid';
+            $status = 'Partial';
         }
         $bo->status = $status;
         $bo->update();
@@ -104,6 +108,7 @@ class BuyoutController extends Controller
         $payment->bo_company_id = $b_id;
         $payment->status = $status;
         $payment->save();
+
 
         $files = $request->file('attachment');
         if ($request->hasFile('attachment')) {
@@ -151,9 +156,8 @@ class BuyoutController extends Controller
         //Update Amount
         $boPay->amount = $request->amount_edit;
         $boPay->save();
-
-        //Upadte Balance
-
+        // dd($boPay);
+        //Update Balance
         $boComp->balance = $boComp->total_amt - $boPay->amount;
         // dd($boComp->balance);
         if ($boComp->balance == 0) {
@@ -161,10 +165,6 @@ class BuyoutController extends Controller
             $boComp->balance = $boComp->balance;
             $boComp->save();
         }
-
-
-
-
         Alert::success('Payment amount was updated')->persistent('Dismiss');
         return back();
     }

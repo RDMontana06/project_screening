@@ -4,7 +4,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Payment {{ $buyoutPayments->bo_companies[0]->id }}</h5>
+				<h5 class="modal-title">Payment</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -16,25 +16,27 @@
 				<div class="modal-body">
 
 					<div class="form-group">
-						<label for="total_amt">Total Amount</label>
+						<label>Total Amount</label>
 						@if ($buyoutPayments->bo_companies[0]->total_amt > 0)
-							<input type="number" class="form-control" value="{{ $buyoutPayments->bo_companies[0]->total_amt }}"
-								id="total_amt" name="total_amt" required readonly>
+							<input type="text" class="form-control"
+								value="{{ number_format($buyoutPayments->bo_companies[0]->total_amt, 2) }}" id="total_amt" name="total_amt"
+								required readonly="true">
+							<input type="text" hidden value="{{ $buyoutPayments->bo_companies[0]->total_amt }}" name="tot_amt">
 						@else
 							<input type="number" class="form-control" value="" id="totalAmt" name="total_amt" required>
 						@endif
 
 					</div>
 					<div class="form-group">
-						<label for="total_amt">Total Paid</label>
+						<label>Total Paid</label>
 						<input type="text" class="form-control" disabled="true"
-							value="{{ number_format($buyoutPayments->bo_companies[0]->payments->sum('amount')) }}" id="total_paid"
+							value="{{ number_format($buyoutPayments->bo_companies[0]->payments->sum('amount'), 2) }}" id="total_paid"
 							name="total_amt_paid">
 					</div>
 					<div class="form-group">
 						<label for="amount">Amount <small>(Required)</small></label>
 						<input type="number" class="form-control" id="amt" name="amount" placeholder="0.00" min="1"
-							required value="{{ old('amount') }}">
+							required value="{{ old('amount') }}" step=".01">
 					</div>
 					<div class="form-group">
 						<label>Attachments</label>

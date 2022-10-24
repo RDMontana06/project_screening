@@ -150,18 +150,18 @@ class ProjectController extends Controller
     public function updateProject(Request $request, $id)
     {
         // dd($request);
-        // $this->validate($request, [
-        //     'project_name' => 'unique:projects|required',
-        //     'project_type' => 'required',
-        //     'location' => 'required',
-        //     'contactNum' => 'required|unique:contacts',
-        //     'contactPerson' => 'required|unique:contacts',
-        //     'address' => 'required',
-        //     'type' =>  'required',
-        //     'approved_budget' => 'required',
-        //     'remarks' => 'required',
-        //     'file' => 'required',
-        // ]);
+        $this->validate($request, [
+            'project_name' => 'required',
+            'project_type' => 'required',
+            'location' => 'required',
+            'contactNum' => 'sometimes|array|unique:contacts',
+            'contactPerson' => 'sometimes|array|unique:contacts',
+            'address' => 'required',
+            'type' =>  'required',
+            'approved_budget' => 'required',
+            'remarks' => 'required',
+            // 'file' => 'required',
+        ]);
 
         $project =  Project::findOrFail($id);
         $project->project_name = $request->project_name;
@@ -189,9 +189,11 @@ class ProjectController extends Controller
             $contacts->contact_name = $contactName;
             $contacts->update();;
         }
-
+        //dd($request->file);
         $attachements = Attachment::where('project_id', $id)->whereNotIn('id', $request->filesAttach)->get();
+        dd($attachements);
         foreach ($attachements as $attach) {
+            dd('----------------');
             $attach->status = 0;
             $attach->update();
         }
@@ -203,8 +205,6 @@ class ProjectController extends Controller
                 $path = $file->getClientOriginalName();
                 $name = time() . '-' . $path;
                 //$file->move(public_path().'/project-images/', $name);
-
-
                 $attachment = new Attachment();
                 //$attachment->attachment = $file->storeAs('storage/app/public/project-files', $name);
                 $file->move(public_path() . '/project-files/', $name);

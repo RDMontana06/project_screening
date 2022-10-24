@@ -83,10 +83,11 @@
 														class="btn btn-icon btn-secondary btn-sm" title="Edit Project">
 														<span class="ti-pencil"></span>
 													</button>
-													@include('projectScreening.show_project')
+
 												</td>
 											</tr>
 											@include('projectScreening.edit_project_form')
+											@include('projectScreening.show_project')
 										@endforeach
 									</tbody>
 								</table>

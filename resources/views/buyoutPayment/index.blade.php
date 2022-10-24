@@ -57,7 +57,7 @@
 													class="badge badge-primary">{{ $buyoutPayments->status }}</label>
 											@elseif ($buyoutPayments->status == 'For Payment')
 												<label id="approvalStatus{{ $buyoutPayments->id }}"
-													class="badge badge-dark">{{ $buyoutPayments->status }}</label>
+													class="badge badge-outline-danger">{{ $buyoutPayments->status }}</label>
 											@elseif ($buyoutPayments->status == 'Buyout Fully Paid')
 												<label id="approvalStatus{{ $buyoutPayments->id }}"
 													class="badge badge-outline-success">{{ $buyoutPayments->status }}</label>
@@ -80,8 +80,9 @@
 												<label class="badge badge-success">{{ $buyoutPayments->bo_companies[0]->status }}</label>
 											@endif
 										</td>
+
 										<td style="width:10%;" class="">
-											@if ($buyoutPayments->bo_companies[0]->total_amt == 0)
+											@if ($buyoutPayments->bo_companies[0]->balance == 0 && $buyoutPayments->bo_companies[0]->status != 'Fully Paid')
 												<button data-target="#buyoutSelect{{ $buyoutPayments->bo_companies[0]->id }}" data-toggle="modal"
 													type="button" class="btn btn-outline-success btn-rounded btn-icon " title="Proceed to Payment">
 													<span class="fa-solid fa-money-bill"></span>
@@ -89,7 +90,7 @@
 											@endif
 											{{-- {{ dd($buyoutPayments->bo_companies[0]->payments) }} --}}
 											@include('buyoutPayment.payment_details')
-											@if (count($buyoutPayments->bo_companies[0]->payments))
+											@if (count($buyoutPayments->bo_companies[0]->payments) > 0)
 												<button data-target="#viewDetails{{ $buyoutPayments->bo_companies[0]->id }}" data-toggle="modal"
 													class="btn btn-outline-info btn-rounded btn-icon" title="View Payments">
 													<span class="fa-solid fa-files"></span>
@@ -130,6 +131,7 @@
 				]
 			});
 		});
+		console.log(`test.replace(/[\n\r]+g; ' ')`);
 		// $(document).ready(function() {
 
 		// $(document).on("click", ".buyoutSelect", function() {
