@@ -37,7 +37,9 @@ class ProjectController extends Controller
             'type' =>  'required',
             'approved_budget' => 'required',
             'remarks' => 'required',
-            'file' => 'required',
+            'file.*' => 'required|max:2000',
+        ], [
+            'file.*.max' => 'Sorry! Maximum allowed size for an image is 2MB',
         ]);
 
         $refCode = 'PSF';
@@ -149,7 +151,7 @@ class ProjectController extends Controller
     }
     public function updateProject(Request $request, $id)
     {
-        // dd($request);
+
         $this->validate($request, [
             'project_name' => 'required',
             'project_type' => 'required',
@@ -160,7 +162,10 @@ class ProjectController extends Controller
             'type' =>  'required',
             'approved_budget' => 'required',
             'remarks' => 'required',
-            // 'file' => 'required',
+            'file.*' => 'max:2000'
+
+        ], [
+            'file.*.max' => 'Sorry! Maximum allowed size for an image is 2MB',
         ]);
 
         $project =  Project::findOrFail($id);
